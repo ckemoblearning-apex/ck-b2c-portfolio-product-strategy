@@ -272,60 +272,6 @@ td small{font-size:12px;color:var(--text-muted)}
 </head>
 <body>
 
-<!-- ═══════════════════════════ PASSWORD GATE ════════════════════════ -->
-<div id="gate" style="
-  position:fixed;inset:0;background:#ffffff;z-index:9999;
-  display:flex;align-items:center;justify-content:center;
-">
-  <div style="
-    background:#f8f9fb;border:1px solid #d1d9e6;border-radius:12px;
-    padding:40px;width:360px;text-align:center;
-  ">
-    <div style="
-      width:40px;height:40px;border-radius:8px;background:#cc0000;
-      display:flex;align-items:center;justify-content:center;
-      font-weight:800;font-size:12px;color:#fff;margin:0 auto 16px;
-      font-family:'Syne',sans-serif;
-    ">CK</div>
-    <div style="font-size:16px;font-weight:700;margin-bottom:4px;font-family:'Syne',sans-serif">Circle K eMobility</div>
-    <div style="font-size:13px;color:#4b5e7a;margin-bottom:24px">Portfolio Strategy · Confidential</div>
-    <input id="gate-input" type="password" placeholder="Enter password"
-      style="
-        width:100%;padding:10px 14px;border:1px solid #d1d9e6;border-radius:8px;
-        font-size:14px;font-family:'DM Sans',sans-serif;outline:none;
-        text-align:center;margin-bottom:12px;
-      "
-      onkeydown="if(event.key==='Enter')checkGate()"
-    >
-    <div id="gate-error" style="font-size:12px;color:#b91c1c;margin-bottom:10px;display:none">Incorrect password. Try again.</div>
-    <button onclick="checkGate()" style="
-      width:100%;padding:10px;background:#b45309;color:#fff;border:none;
-      border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;
-      font-family:'DM Sans',sans-serif;
-    ">Access Dashboard</button>
-  </div>
-</div>
-
-<script>
-(function(){
-  const PASSWORD = 'ckemobility2026';
-  const SESSION_KEY = 'ck_auth';
-  if(sessionStorage.getItem(SESSION_KEY) === '1'){
-    document.getElementById('gate').style.display = 'none';
-  }
-  window.checkGate = function(){
-    const val = document.getElementById('gate-input').value;
-    if(val === PASSWORD){
-      sessionStorage.setItem(SESSION_KEY,'1');
-      document.getElementById('gate').style.display = 'none';
-    } else {
-      document.getElementById('gate-error').style.display = 'block';
-      document.getElementById('gate-input').value = '';
-      document.getElementById('gate-input').focus();
-    }
-  };
-})();
-</script>
 
 <!-- ═══════════════════════════ HEADER ════════════════════════════════ -->
 <header class="hdr">
