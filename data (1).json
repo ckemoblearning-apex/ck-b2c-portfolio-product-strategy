@@ -1,0 +1,342 @@
+{
+  "meta": {
+    "title": "Circle K eMobility Â· B2C Product",
+    "subtitle": "Portfolio Strategy Â· 2027",
+    "lastUpdated": "March 11 2026",
+    "confidential": true,
+    "outcomeStatement": "Become the market's easiest charging provider",
+    "outcomeMetric": "Target: Brand preference #1 in Nordics by end FY27"
+  },
+  "kpis": [],
+  "topRisks": [
+    {
+      "id": "tr1",
+      "severity": "high",
+      "title": "1CP Resource Re-prioritisation ÃÂ¢ÃÂÃÂ Viability Risk",
+      "desc": "Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined."
+    },
+    {
+      "id": "tr2",
+      "severity": "high",
+      "title": "GMAP Convergence ÃÂ¢ÃÂÃÂ Customer Migration & GTM Risk",
+      "desc": "Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed. Phased market launch (Latvia/Lithuania Tap & Pay first) agreed as interim mitigation."
+    }
+  ],
+  "strategicOpportunities": [
+    {
+      "id": "so1",
+      "icon": "ÃÂ¢ÃÂÃÂ¡",
+      "title": "Autocharge as Differentiation Anchor",
+      "desc": "Autocharge is already live and establishes a credibility baseline no competitor has matched at scale. The strategic opportunity is to extend this 'easiest' perception across all five friction points ÃÂ¢ÃÂÃÂ arrival, start, session, error, roaming.",
+      "color": "green"
+    },
+    {
+      "id": "so2",
+      "icon": "ÃÂ°ÃÂÃÂÃÂª",
+      "title": "Charging Session as Store Traffic Driver",
+      "desc": "Dwell time during a charging session is an underutilised commercial asset. GMAP convergence and in-session engagement create a direct link between charging experience quality and store visits per session.",
+      "color": "blue"
+    },
+    {
+      "id": "so3",
+      "icon": "ÃÂ°ÃÂÃÂÃÂ",
+      "title": "Plug & Charge (ISO 15118-20) ÃÂ¢ÃÂÃÂ Future Moat",
+      "desc": "Certificate-based mutual authentication removes the last remaining friction point for registered users. Vehicle-side dependency is the blocker; getting ahead of the adoption curve creates a durable competitive advantage.",
+      "color": "purple"
+    }
+  ],
+  "focusPriorities": [
+    {
+      "id": "fp1",
+      "icon": "ÃÂ°ÃÂÃÂÃÂ",
+      "title": "Drive New Customer Growth",
+      "desc": "Increase visibility in maps and in-car navigation. Leverage converged Charge App / GMAP journey. Activate new strategic partnerships.",
+      "color": "green"
+    },
+    {
+      "id": "fp2",
+      "icon": "ÃÂ°ÃÂÃÂÃÂ©ÃÂ°ÃÂÃÂÃÂ°",
+      "title": "Sharpen Denmark Traction",
+      "desc": "Enable stronger strategy execution and market penetration in Denmark, where traction lags Norway and Sweden.",
+      "color": "amber"
+    },
+    {
+      "id": "fp3",
+      "icon": "ÃÂ°ÃÂÃÂÃÂ£",
+      "title": "Strengthen Brand Equity",
+      "desc": "New comms campaign aligned to 'Make Your Day' brand platform. New EV B2C marketing toolkit briefed Q4 FY26, live in SCA approx Q2/3 FY27.",
+      "color": "blue"
+    },
+    {
+      "id": "fp4",
+      "icon": "ÃÂ°ÃÂÃÂÃÂ",
+      "title": "Invest and Launch Plug & Charge",
+      "desc": "Committed FY27 priority. Certificate-based session start removes the last authentication friction point for registered users.",
+      "color": "purple"
+    }
+  ],
+  "domains": [
+    {
+      "id": "roaming",
+      "name": "Inbound roaming",
+      "pm": "Kunsaya",
+      "initials": "IR",
+      "status": "amber",
+      "statusLabel": "Directional",
+      "confidence": "evidenced",
+      "opp": 3,
+      "live": 0,
+      "eval": 1,
+      "stratImpact": 7,
+      "friction": 6,
+      "m1": {
+        "label": "Opportunities",
+        "val": "1"
+      },
+      "m2": {
+        "label": "Solutions",
+        "val": "1 eval"
+      },
+      "now": "Automate invoicing · Project:Credit policy & dunning",
+      "next": "Integrate with hubs (Hubject, Gireve, Enapi)",
+      "later": "Migrate from Spirii to EV One ",
+      "note": "",
+      "desc": "Our inbound roaming are: 5 % in SCA and 95 % in M4. The inbound roaming capability are not there to serve the M4 markets. This has been outsourced to Spirii and we need to take this home, build necessary capabilities, policies, services and integrations to do this"
+    },
+    {
+      "id": "convergence",
+      "name": "GMAP Convergence & Commercial",
+      "pm": "Valentina",
+      "initials": "",
+      "status": "blue",
+      "statusLabel": "Development",
+      "confidence": "evidenced",
+      "opp": 1,
+      "live": 0,
+      "eval": 1,
+      "stratImpact": 9,
+      "friction": 5,
+      "m1": {
+        "label": "Opportunities",
+        "val": "1"
+      },
+      "m2": {
+        "label": "Solutions",
+        "val": "1 eval"
+      },
+      "now": "Finalize development to GTM · Marketing plan ",
+      "next": "GTM · Autocharge enrollment · RFID enablement",
+      "later": "Prompts to drive traffic to store · Personalization",
+      "note": "",
+      "desc": "Converging the Circle K Charge app into the main Circle K app. Enables store visits per session metric and long-term customer lifetime value uplift."
+    },
+    {
+      "id": "dom-1773238746776",
+      "name": "Payments",
+      "pm": "Neeti",
+      "initials": "",
+      "status": "amber",
+      "statusLabel": "",
+      "confidence": "evidenced",
+      "opp": 3,
+      "live": 0,
+      "eval": 0,
+      "stratImpact": 5,
+      "friction": 5,
+      "m1": {
+        "label": "Opportunities",
+        "val": "0"
+      },
+      "m2": {
+        "label": "Solutions",
+        "val": "0"
+      },
+      "now": "Migrate OUPT from Driivz to EV One",
+      "next": "Assess scope of OpenPOS · Finalize M4 OUPT strategy",
+      "later": "Migrate OUPT from Spirii to EV One · Assess PLC cards ",
+      "note": "",
+      "desc": ""
+    }
+  ],
+  "solutions": [
+    {
+      "id": 1,
+      "title": "Autocharge",
+      "domain": "Charge",
+      "status": "live",
+      "markets": [
+        "NO",
+        "SE",
+        "DK",
+        "EE"
+      ],
+      "desc": "Plug in, charging starts. No action required. Proven high satisfaction."
+    },
+    {
+      "id": 2,
+      "title": "CK Charge Mobile App",
+      "domain": "Channel",
+      "status": "live",
+      "markets": [
+        "NO",
+        "SE",
+        "DK",
+        "EE",
+        "PL"
+      ],
+      "desc": "B2C mobile application to find station, start/stop charging, onboard autocharge, see transactions etc. Proven high satisfaction."
+    },
+    {
+      "id": 3,
+      "title": "Tap & Pay ÃÂ¢ÃÂÃÂ Logos",
+      "domain": "Payments",
+      "status": "live",
+      "markets": [
+        "IE"
+      ],
+      "desc": "Customer can unregistered pay for charging session with their card or x-wallet. This solution does not have integration with Extra nor provides automatic reconciliation."
+    },
+    {
+      "id": 4,
+      "title": "Tap & Pay ÃÂ¢ÃÂÃÂ Adyen (S1U2)",
+      "domain": "Payments",
+      "status": "live",
+      "markets": [
+        "NO",
+        "SE",
+        "DK",
+        "EE"
+      ],
+      "desc": "Customer can unregistered pay for charging session with their card or x-wallet. This solution has integration with Extra and provides automatic reconciliation."
+    },
+    {
+      "id": 5,
+      "title": "GMAP Convergence",
+      "domain": "Convergence",
+      "status": "dev",
+      "markets": [
+        "NO",
+        "SE",
+        "DK",
+        "PL",
+        "EE",
+        "LV",
+        "LT",
+        "DE",
+        "BE",
+        "LU",
+        "NL"
+      ],
+      "desc": "One integrated experience that delivers the market's easiest and most rewarding EV-charging experience while unifying customer experience across all CK functions."
+    },
+    {
+      "id": 6,
+      "title": "Car dealership giftcard acquisition pilot",
+      "domain": "Partnerships",
+      "status": "eval",
+      "markets": [],
+      "desc": "Micro-testing a giftcard initiative in partnership with car dealerships. Hypothesis: introducing Circle K to EV drivers at point of new car pickup drives first charging sessions and app downloads."
+    },
+    {
+      "id": 7,
+      "title": "Migrate M4 Payment terminal to EV One",
+      "domain": "Payments",
+      "status": "eval",
+      "markets": [],
+      "desc": "Evaluation of migrating M4 market payment terminals to the EV One platform. Scope, dependencies, and feasibility under active assessment."
+    },
+    {
+      "id": 8,
+      "title": "Inbound Roaming",
+      "domain": "Attract",
+      "status": "live",
+      "markets": [
+        "NO",
+        "SE",
+        "DK"
+      ],
+      "desc": "Active eMSP connections enabling customers from partner networks to charge at Circle K stations. Connected eMSPs: Elton (NO, SE, DK), Mer (SE), Radius (IE), Ayvens (NO), NFL (NO)."
+    },
+    {
+      "id": 9,
+      "title": "Show 1M chargepoints and prices in GMAP",
+      "domain": "1CP",
+      "status": "dev",
+      "markets": [
+        "NO",
+        "SE",
+        "DK",
+        "PL",
+        "EE",
+        "IE",
+        "LV",
+        "LT"
+      ],
+      "desc": "Surfacing 1M+ chargepoints with live pricing across the roaming network directly inside the Circle K app."
+    },
+    {
+      "id": 10,
+      "title": "Show 1M chargepoints and prices in Webmap",
+      "domain": "1CP",
+      "status": "dev",
+      "markets": [
+        "NO",
+        "SE",
+        "DK",
+        "PL",
+        "EE",
+        "IE",
+        "LV",
+        "LT"
+      ],
+      "desc": "Surfacing 1M+ chargepoints with live pricing across the roaming network on the Circle K web map."
+    }
+  ],
+  "risks": [
+    {
+      "id": "r1",
+      "opportunity": "Roaming experience opacity",
+      "domain": "Roaming",
+      "riskType": "value",
+      "severity": "medium",
+      "description": "Pricing opacity and authentication inconsistency for non-native users creates distrust and discourages repeat use.",
+      "mitigation": "OCPI-based roaming improvements in evaluation. Transparent pricing pre-session is unexplored."
+    },
+    {
+      "id": "r2",
+      "opportunity": "Plug & Charge (ISO 15118-20)",
+      "domain": "Get to Station & Start",
+      "riskType": "feasibility",
+      "severity": "medium",
+      "description": "Certificate-based authentication requires vehicle OEM adoption and charger firmware updates. External dependency not within Circle K's control.",
+      "mitigation": "Evaluation stage. Monitor OEM adoption curves. ISO 15118-2 (MAC-based) already live as interim."
+    },
+    {
+      "id": "r3",
+      "opportunity": "In-car display integration",
+      "domain": "Charging Session",
+      "riskType": "feasibility",
+      "severity": "low",
+      "description": "Requires OCPP session data combined with vehicle API access. Both are externally dependent and market is fragmented across OEMs.",
+      "mitigation": "Discovery only. Not a near-term priority. Monitor standardisation progress."
+    },
+    {
+      "id": "r4",
+      "opportunity": "1CP resource re-prioritisation",
+      "domain": "Programme-level",
+      "riskType": "viability",
+      "severity": "high",
+      "description": "Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined.",
+      "mitigation": "Escalate to eMM. Clarify which B2C GVSL items are at risk and reprioritise accordingly."
+    },
+    {
+      "id": "r5",
+      "opportunity": "GMAP convergence ÃÂ¢ÃÂÃÂ customer migration & GTM",
+      "domain": "GMAP Convergence & Commercial",
+      "riskType": "viability",
+      "severity": "high",
+      "description": "Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed.",
+      "mitigation": "Define migration plan and rollback strategy. Validate GTM approach before full rollout. Phased market launch (Latvia/Lithuania Tap & Pay first) agreed as interim mitigation."
+    }
+  ]
+}

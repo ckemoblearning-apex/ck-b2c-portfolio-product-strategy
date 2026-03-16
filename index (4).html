@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Circle K eMobility · B2C Product Portfolio Strategy · 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--surface:#f8f9fb;--surface-2:#eef1f6;--border:#d1d9e6;
+  --text:#0f172a;--text-muted:#4b5e7a;
+  --accent:#b45309;
+  --green:#15803d;--green-bg:rgba(21,128,61,.1);
+  --amber:#b45309;--amber-bg:rgba(180,83,9,.1);
+  --red:#b91c1c;--red-bg:rgba(185,28,28,.1);
+  --blue:#0369a1;--blue-bg:rgba(3,105,161,.1);
+  --purple:#6d28d9;--purple-bg:rgba(109,40,217,.1);
+  --gray:#4b5e7a;
+  --ck-red:#cc0000;
+  --r:8px;--rl:12px;
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-size:14px;
+}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap');
+body{background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.6}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.hdr{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:14px 32px;display:flex;align-items:center;
+  justify-content:space-between;position:sticky;top:0;z-index:100;
+}
+.hdr-brand{display:flex;align-items:center;gap:12px}
+.logo{
+  width:36px;height:36px;border-radius:8px;display:flex;
+  align-items:center;justify-content:center;font-weight:800;font-size:11px;
+  color:#fff;background:var(--ck-red);flex-shrink:0;letter-spacing:-.02em;
+  font-family:'Syne',sans-serif;
+}
+.hdr-title{font-size:15px;font-weight:600;font-family:'Syne',sans-serif}
+.hdr-sub{font-size:12px;color:var(--text-muted)}
+.hdr-meta{font-size:12px;color:var(--text-muted)}
+.hdr-actions{display:flex;align-items:center;gap:12px}
+.dl-btn{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--text);
+  padding:6px 14px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;
+  display:flex;align-items:center;gap:6px;transition:background .18s;
+}
+.dl-btn:hover{background:var(--accent);border-color:var(--accent);color:#000}
+
+/* ── Audience nav ───────────────────────────────────────────── */
+.anav{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:0 32px;display:flex;gap:0;
+}
+.nbtn{
+  background:none;border:none;color:var(--text-muted);
+  padding:12px 22px;cursor:pointer;font-size:13px;font-weight:500;
+  border-bottom:2px solid transparent;transition:all .18s;
+  display:flex;align-items:center;gap:6px;
+}
+.nbtn:hover{color:var(--text);background:var(--surface-2)}
+.nbtn.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(180,83,9,0.07)}
+
+/* ── Views ──────────────────────────────────────────────────── */
+.view{display:none;padding:32px;max-width:1400px;margin:0 auto}
+.view.active{display:block}
+.vhdr{margin-bottom:28px}
+.vtitle{font-size:20px;font-weight:700;margin-bottom:4px;font-family:'Syne',sans-serif}
+.vdesc{font-size:13px;color:var(--text-muted)}
+
+/* ── KPI cards ──────────────────────────────────────────────── */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:18px}
+.kpi.green{border-top:3px solid var(--green)}
+.kpi.amber{border-top:3px solid var(--amber)}
+.kpi.red{border-top:3px solid var(--red)}
+.kpi.blue{border-top:3px solid var(--blue)}
+.kpi.purple{border-top:3px solid var(--purple)}
+.kpi-lbl{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:8px;font-family:'DM Mono',monospace}
+.kpi-val{font-size:26px;font-weight:700;margin-bottom:4px;font-family:'Syne',sans-serif}
+.kpi-sub{font-size:13px;color:var(--text-muted)}
+.kpi-target{font-size:12px;color:var(--text-muted);margin-top:4px;font-family:'DM Mono',monospace}
+
+/* ── Grid helpers ───────────────────────────────────────────── */
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:20px}
+.row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:20px}
+
+/* ── Cards ──────────────────────────────────────────────────── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:20px;margin-bottom:20px}
+.card-title{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:16px;font-family:'DM Mono',monospace}
+
+/* ── Chart wrapper ───────────────────────────────────────────── */
+.chart-wrap{position:relative;height:280px}
+.chart-note{font-size:12px;color:var(--text-muted);margin-top:8px;font-family:'DM Mono',monospace}
+
+/* ── Badges ─────────────────────────────────────────────────── */
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:500}
+.badge.green{background:var(--green-bg);color:var(--green)}
+.badge.amber{background:var(--amber-bg);color:var(--amber)}
+.badge.red{background:var(--red-bg);color:var(--red)}
+.badge.blue{background:var(--blue-bg);color:var(--blue)}
+.badge.purple{background:var(--purple-bg);color:var(--purple)}
+.badge.gray{background:rgba(100,116,139,.15);color:var(--gray)}
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* ── Solution status pills ───────────────────────────────────── */
+.sol{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
+.sol.live{background:rgba(52,211,153,.15);color:var(--green)}
+.sol.eval{background:rgba(167,139,250,.15);color:var(--purple)}
+.sol.disc{background:rgba(100,116,139,.12);color:var(--gray)}
+.sol.dev{background:rgba(3,105,161,.15);color:var(--blue)}
+
+/* ── Confidence tags ─────────────────────────────────────────── */
+.conf{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
+.conf.evidenced{background:rgba(52,211,153,.15);color:var(--green)}
+.conf.directional{background:rgba(245,158,11,.15);color:var(--amber)}
+.conf.hypothesis{background:rgba(100,116,139,.12);color:var(--gray)}
+
+/* ── Risk level ──────────────────────────────────────────────── */
+.risk-pill{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
+.risk-pill.high{background:var(--red-bg);color:var(--red)}
+.risk-pill.medium{background:var(--amber-bg);color:var(--amber)}
+.risk-pill.low{background:var(--green-bg);color:var(--green)}
+
+/* ── Table ──────────────────────────────────────────────────── */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--text);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding:10px 14px;border-bottom:2px solid var(--border);font-family:'DM Mono',monospace;background:var(--surface-2)}
+td{padding:13px 14px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:13px}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(0,0,0,0.025)}
+tr:hover td{background:var(--surface-2)}
+td small{font-size:12px;color:var(--text-muted)}
+
+/* ── Progress bar ────────────────────────────────────────────── */
+.pb-track{background:var(--surface-2);border-radius:4px;height:6px;overflow:hidden;flex:1}
+.pb-fill{height:100%;border-radius:4px}
+
+/* ── Investment bars ─────────────────────────────────────────── */
+.inv-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-size:13px}
+.inv-lbl{width:200px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inv-val{width:60px;text-align:right;color:var(--text-muted);flex-shrink:0;font-family:'DM Mono',monospace;font-size:12px}
+
+/* ── Filter bar ──────────────────────────────────────────────── */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.fbtn{background:var(--surface-2);border:1px solid var(--border);color:var(--text-muted);padding:5px 15px;border-radius:20px;font-size:12px;cursor:pointer;transition:all .18s}
+.fbtn:hover{color:var(--text)}
+.fbtn.active{background:var(--amber-bg);border-color:var(--amber);color:var(--amber)}
+
+/* ── Now-Next-Later ──────────────────────────────────────────── */
+.nnl-header{
+  display:grid;grid-template-columns:200px 1fr 1fr 1fr;
+  background:var(--surface-2);border-radius:var(--r) var(--r) 0 0;overflow:hidden;
+}
+.nnl-hcell{padding:10px 14px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
+.nnl-hcell.now{color:var(--green)}.nnl-hcell.next{color:var(--amber)}.nnl-hcell.later{color:var(--blue)}.nnl-hcell.prod{color:var(--text-muted)}
+.nnl-body{background:var(--surface);border:1px solid var(--border);border-top:none;border-radius:0 0 var(--r) var(--r)}
+.nnl-row{display:grid;grid-template-columns:200px 1fr 1fr 1fr;border-bottom:1px solid var(--border)}
+.nnl-row:last-child{border-bottom:none}
+.nnl-cell{padding:12px 14px;font-size:13px;border-right:1px solid var(--border)}
+.nnl-cell:last-child{border-right:none}
+.chip{display:inline-block;background:var(--surface-2);border:1px solid var(--border);border-radius:5px;padding:4px 10px;font-size:12px;color:var(--text);margin-bottom:4px;margin-right:4px}
+.nnl-pname{font-weight:600;font-size:13px;margin-bottom:2px}
+.nnl-pstage{font-size:11px;color:var(--text-muted)}
+
+/* ── Domain cards ───────────────────────────────────────────── */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:24px}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:18px;transition:border-color .18s}
+.pcard:hover{border-color:var(--accent)}
+.pcard-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.pname{font-size:15px;font-weight:600;margin-bottom:3px;font-family:'Syne',sans-serif}
+.pstage{font-size:11px;color:var(--text-muted)}
+.pmetrics{display:flex;gap:16px;margin-bottom:14px}
+.pm{flex:1}
+.pm-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--text-muted);margin-bottom:2px;font-family:'DM Mono',monospace}
+.pm-val{font-size:16px;font-weight:700;font-family:'Syne',sans-serif}
+.powner{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text-muted);margin-bottom:12px}
+.avatar{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--purple));display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:#000;flex-shrink:0}
+.pdesc{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* ── Capacity row ────────────────────────────────────────────── */
+.cap-row{display:grid;grid-template-columns:200px 1fr 80px;align-items:center;gap:14px;margin-bottom:10px;font-size:13px}
+.cap-val{text-align:right;color:var(--text-muted);font-family:'DM Mono',monospace;font-size:12px}
+
+/* ── Risks ───────────────────────────────────────────────────── */
+.risk-list{display:flex;flex-direction:column;gap:10px}
+.risk{display:flex;gap:14px;padding:13px;background:var(--surface-2);border-radius:var(--r);align-items:flex-start}
+.risk-sev{padding:3px 9px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;flex-shrink:0;margin-top:2px;font-family:'DM Mono',monospace}
+.risk-sev.high{background:var(--red-bg);color:var(--red)}
+.risk-sev.medium{background:var(--amber-bg);color:var(--amber)}
+.risk-sev.low{background:var(--green-bg);color:var(--green)}
+.risk-title{font-size:13px;font-weight:600;margin-bottom:4px}
+.risk-desc{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* ── Opp cards ───────────────────────────────────────────────── */
+.opp{padding:14px;background:var(--surface-2);border-radius:var(--r);border-left:3px solid var(--green);margin-bottom:10px}
+.opp-title{font-size:13px;font-weight:600;margin-bottom:5px}
+.opp-desc{font-size:13px;color:var(--text-muted);line-height:1.6}
+
+/* ── Solution pipeline (Engineering tab) ────────────────────── */
+.sol-section{margin-bottom:24px}
+.sol-section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sol-section-title{font-size:13px;font-weight:600}
+.sol-count{font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace}
+.sol-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.sol-card{background:var(--surface-2);border-radius:var(--r);padding:14px;border:1px solid var(--border)}
+.sol-card.live-card{border-left:3px solid var(--green)}
+.sol-card.eval-card{border-left:3px solid var(--purple)}
+.sol-card.disc-card{border-left:3px solid var(--gray)}
+.sol-card.dev-card{border-left:3px solid var(--blue)}
+.sol-card-title{font-size:13px;font-weight:500;margin-bottom:6px;line-height:1.4}
+.sol-card-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.sol-card-domain{font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace}
+.sol-card-desc{font-size:13px;color:var(--text-muted);line-height:1.6;margin-top:6px}
+
+/* ── Risk table rows ─────────────────────────────────────────── */
+.risk-type{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:2px 7px;border-radius:3px;font-family:'DM Mono',monospace}
+.risk-type.value{background:rgba(245,158,11,.15);color:var(--amber)}
+.risk-type.usability{background:rgba(56,189,248,.15);color:var(--blue)}
+.risk-type.feasibility{background:rgba(167,139,250,.15);color:var(--purple)}
+.risk-type.viability{background:rgba(248,113,113,.15);color:var(--red)}
+
+/* ── Market tags ─────────────────────────────────────────────── */
+.mkt-tag{display:inline-flex;align-items:center;gap:3px;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:600;font-family:'DM Mono',monospace;background:var(--blue-bg);color:var(--blue);margin:2px 2px 0 0}
+.mkt-group-tag{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:4px;font-size:10px;font-weight:700;font-family:'DM Mono',monospace;background:var(--blue-bg);color:var(--blue);margin:2px 2px 0 0}
+.mkt-row{margin-top:8px;display:flex;flex-wrap:wrap;gap:0}
+.mkt-selector{margin-bottom:14px;padding:14px;background:var(--surface-2);border-radius:var(--r);border:1px solid var(--border)}
+.mkt-selector-title{font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:10px}
+.mkt-group-label{font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:700;margin-bottom:6px;margin-top:8px}
+.mkt-group-label:first-child{margin-top:0}
+.mkt-shortcuts{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.mkt-shortcut{padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600;font-family:'DM Mono',monospace;border:1.5px solid var(--border);background:var(--bg);color:var(--text-muted);cursor:pointer;transition:all .15s}
+.mkt-shortcut:hover{border-color:var(--blue);color:var(--blue)}
+.mkt-shortcut.active{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.mkt-checkboxes{display:flex;flex-wrap:wrap;gap:6px}
+.mkt-cb-label{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:5px;border:1.5px solid var(--border);font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;background:var(--bg);color:var(--text-muted);transition:all .15s;user-select:none}
+.mkt-cb-label:hover{border-color:var(--blue);color:var(--blue)}
+.mkt-cb-label input{display:none}
+.mkt-cb-label.checked{border-color:var(--blue);background:var(--blue-bg);color:var(--blue)}
+.mkt-mode-btn{padding:7px 18px;font-size:12px;font-weight:600;font-family:'DM Mono',monospace;background:var(--bg);color:var(--text-muted);border:none;cursor:pointer;transition:all .15s}
+.mkt-mode-btn:hover{background:var(--surface-2);color:var(--text)}
+.mkt-mode-active{background:var(--blue-bg) !important;color:var(--blue) !important}
+
+/* ── Bubble legend ───────────────────────────────────────────── */
+.blegend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.bleg-item{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text-muted)}
+.bleg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+
+/* ── Divider ─────────────────────────────────────────────────── */
+.divider{height:1px;background:var(--border);margin:22px 0}
+
+/* ── Outcome statement ───────────────────────────────────────── */
+.outcome-banner{
+  background:rgba(180,83,9,.06);border:1px solid rgba(180,83,9,.25);
+  border-radius:var(--rl);padding:16px 20px;margin-bottom:24px;
+  display:flex;align-items:center;gap:16px;
+}
+.outcome-label{font-size:9px;font-family:'DM Mono',monospace;letter-spacing:.15em;color:var(--amber);text-transform:uppercase;margin-bottom:4px}
+.outcome-text{font-size:15px;font-weight:600;color:var(--amber);font-family:'Syne',sans-serif}
+.outcome-metric{font-size:11px;color:var(--text-muted);font-family:'DM Mono',monospace;margin-top:2px}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media(max-width:800px){
+  .view{padding:16px}
+  .hdr{padding:12px 16px}
+  .anav{padding:0 16px;overflow-x:auto}
+  .row-2,.row-3{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ PASSWORD GATE ════════════════════════ -->
+<div id="gate" style="
+  position:fixed;inset:0;background:#ffffff;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+">
+  <div style="
+    background:#f8f9fb;border:1px solid #d1d9e6;border-radius:12px;
+    padding:40px;width:360px;text-align:center;
+  ">
+    <div style="
+      width:40px;height:40px;border-radius:8px;background:#cc0000;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:12px;color:#fff;margin:0 auto 16px;
+      font-family:'Syne',sans-serif;
+    ">CK</div>
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px;font-family:'Syne',sans-serif">Circle K eMobility</div>
+    <div style="font-size:13px;color:#4b5e7a;margin-bottom:24px">Portfolio Strategy · Confidential</div>
+    <input id="gate-input" type="password" placeholder="Enter password"
+      style="
+        width:100%;padding:10px 14px;border:1px solid #d1d9e6;border-radius:8px;
+        font-size:14px;font-family:'DM Sans',sans-serif;outline:none;
+        text-align:center;margin-bottom:12px;
+      "
+      onkeydown="if(event.key==='Enter')checkGate()"
+    >
+    <div id="gate-error" style="font-size:12px;color:#b91c1c;margin-bottom:10px;display:none">Incorrect password. Try again.</div>
+    <button onclick="checkGate()" style="
+      width:100%;padding:10px;background:#b45309;color:#fff;border:none;
+      border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;
+      font-family:'DM Sans',sans-serif;
+    ">Access Dashboard</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const PASSWORD = 'ckemobility2026';
+  const SESSION_KEY = 'ck_auth';
+  if(sessionStorage.getItem(SESSION_KEY) === '1'){
+    document.getElementById('gate').style.display = 'none';
+  }
+  window.checkGate = function(){
+    const val = document.getElementById('gate-input').value;
+    if(val === PASSWORD){
+      sessionStorage.setItem(SESSION_KEY,'1');
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      document.getElementById('gate-error').style.display = 'block';
+      document.getElementById('gate-input').value = '';
+      document.getElementById('gate-input').focus();
+    }
+  };
+})();
+</script>
+
+<!-- ═══════════════════════════ HEADER ════════════════════════════════ -->
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="logo">CK</div>
+    <div>
+      <div class="hdr-title">Circle K eMobility · B2C Product</div>
+      <div class="hdr-sub">Portfolio Strategy · 2026</div>
+    </div>
+  </div>
+  <div class="hdr-actions">
+    <div class="hdr-meta">Last updated: Mar 2026 &nbsp;·&nbsp; Confidential</div>
+    <button class="dl-btn" onclick="downloadSelf()">⬇ Download</button>
+  </div>
+</header>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════════════ -->
+<nav class="anav">
+  <button class="nbtn" onclick="showView(this,'executive')">📊 Executive</button>
+  <button class="nbtn" onclick="showView(this,'product')">🗺️ Products</button>
+  <button class="nbtn active" onclick="showView(this,'engineering')">⚙️ Solutions Pipeline</button>
+  <button class="nbtn" onclick="showView(this,'risk')">🔍 Risk Register</button>
+</nav>
+
+<!-- ═══════════════════════════ EXECUTIVE ═════════════════════════════ -->
+<div id="view-executive" class="view">
+  <div class="vhdr">
+    <div class="vtitle">Product Portfolio Strategy</div>
+    <div class="vdesc">A product portfolio strategy is a high-level plan that helps us manage all of its products in a way that aligns with business goals, market opportunities, and internal capabilities. 
+
+It sets the direction for how the entire product portfolio should evolve — whether that means investing in new products, sunsetting 
+end-of-life products
+, or finding the right balance between core and experimental initiatives.</div>
+  </div>
+
+  <div class="outcome-banner">
+    <div>
+      <div class="outcome-label">◆ Desired Outcome</div>
+      <div class="outcome-text">Become the market's easiest EV charging provider</div>
+      <div class="outcome-metric">Session success rate &nbsp;·&nbsp; NPS &nbsp;·&nbsp; Unaided brand recall on 'easy'</div>
+      <div style="margin-top:8px;font-size:11px;font-family:'DM Mono',monospace;color:var(--amber);opacity:0.75;letter-spacing:0.08em;text-transform:uppercase;">Brand promise: "Your Journey Made Easy"</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+<div class="kpi amber">
+      <div class="kpi-lbl">kWh Sold (B2C)</div>
+      <div class="kpi-val">125 million</div>
+      <div class="kpi-sub"></div>
+      <div class="kpi-target"></div>
+    </div>
+    
+    <div class="kpi green">
+      <div class="kpi-lbl">Monthly Active Customers</div>
+      <div class="kpi-val">125.000</div>
+      <div class="kpi-sub"></div>
+      <div class="kpi-target"></div>
+    </div>
+    
+    <div class="kpi blue">
+      <div class="kpi-lbl">Brand Promoters</div>
+      <div class="kpi-val">24%</div>
+      <div class="kpi-sub"></div>
+      <div class="kpi-target"></div>
+    </div>
+        <div class="kpi purple">
+      <div class="kpi-lbl">Store Traffic</div>
+      <div class="kpi-val">—</div>
+      <div class="kpi-sub"></div>
+      <div class="kpi-target"># visits / session</div>
+    </div>
+  </div>
+
+  <div class="row-2">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-title">eMM priorities</div>
+
+      <!-- Scoring input panel (shown until submitted) -->
+      <div id="emmScorePanel" style="margin-bottom: 0px; display: none;">
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;font-family:'DM Mono',monospace;">Score each initiative from 1–10 on both axes, then click <strong>Plot</strong>.</p>
+        <div id="emmScoreRows" style="display:flex;flex-direction:column;gap:10px;margin-bottom:16px">
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:3px solid #b45309">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">1CP</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Business Impact <span id="bi-val-roaming" style="color:var(--accent);font-weight:700">10</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="10" id="bi-roaming" oninput="document.getElementById('bi-val-roaming').textContent=this.value" style="width:100%;accent-color:#b45309;cursor:pointer">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Strategic Fit <span id="sf-val-roaming" style="color:var(--accent);font-weight:700">8</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="8" id="sf-roaming" oninput="document.getElementById('sf-val-roaming').textContent=this.value" style="width:100%;accent-color:#b45309;cursor:pointer">
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:3px solid #b45309">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">Attractively present in-car nav</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Business Impact <span id="bi-val-session" style="color:var(--accent);font-weight:700">7</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="7" id="bi-session" oninput="document.getElementById('bi-val-session').textContent=this.value" style="width:100%;accent-color:#b45309;cursor:pointer">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Strategic Fit <span id="sf-val-session" style="color:var(--accent);font-weight:700">7</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="7" id="sf-session" oninput="document.getElementById('sf-val-session').textContent=this.value" style="width:100%;accent-color:#b45309;cursor:pointer">
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:3px solid #0369a1">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">GMAP Convergence</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Business Impact <span id="bi-val-convergence" style="color:var(--accent);font-weight:700">10</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="10" id="bi-convergence" oninput="document.getElementById('bi-val-convergence').textContent=this.value" style="width:100%;accent-color:#0369a1;cursor:pointer">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Strategic Fit <span id="sf-val-convergence" style="color:var(--accent);font-weight:700">9</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="9" id="sf-convergence" oninput="document.getElementById('sf-val-convergence').textContent=this.value" style="width:100%;accent-color:#0369a1;cursor:pointer">
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:3px solid #b91c1c">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">Exit Legacy Platform</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Business Impact <span id="bi-val-legacy" style="color:var(--accent);font-weight:700">8</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="8" id="bi-legacy" oninput="document.getElementById('bi-val-legacy').textContent=this.value" style="width:100%;accent-color:#b91c1c;cursor:pointer">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Strategic Fit <span id="sf-val-legacy" style="color:var(--accent);font-weight:700">8</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="8" id="sf-legacy" oninput="document.getElementById('sf-val-legacy').textContent=this.value" style="width:100%;accent-color:#b91c1c;cursor:pointer">
+        </div>
+      </div>
+    </div>
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:3px solid #15803d">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">Baltics Fiscalization</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Business Impact <span id="bi-val-baltics" style="color:var(--accent);font-weight:700">3</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="3" id="bi-baltics" oninput="document.getElementById('bi-val-baltics').textContent=this.value" style="width:100%;accent-color:#15803d;cursor:pointer">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Strategic Fit <span id="sf-val-baltics" style="color:var(--accent);font-weight:700">3</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="3" id="sf-baltics" oninput="document.getElementById('sf-val-baltics').textContent=this.value" style="width:100%;accent-color:#15803d;cursor:pointer">
+        </div>
+      </div>
+    </div></div>
+        <button id="emmPlotBtn" onclick="plotEmmChart()" style="
+          background:var(--accent);color:#fff;border:none;border-radius:6px;
+          padding:8px 20px;font-size:12px;font-weight:600;cursor:pointer;
+          font-family:'DM Sans',sans-serif;letter-spacing:0.02em;transition:opacity .18s;
+        " onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Plot chart</button>
+        <button onclick="resetEmmChart()" style="
+          background:none;border:1px solid var(--border);color:var(--text-muted);
+          border-radius:6px;padding:8px 14px;font-size:12px;cursor:pointer;margin-left:8px;
+          font-family:'DM Sans',sans-serif;
+        ">Reset</button>
+      </div>
+
+      <!-- Chart (hidden until plotted) -->
+      <div id="emmChartWrap" style="display: block;">
+        <div class="chart-wrap"><canvas id="strategyMatrix" width="617" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 617px;"></canvas></div>
+        <div id="bubbleLegend" class="blegend">
+    <div class="bleg-item">
+      <div class="bleg-dot" style="background:#b45309"></div>
+      1CP
+    </div>
+    <div class="bleg-item">
+      <div class="bleg-dot" style="background:#b45309"></div>
+      Attractively present in-car nav
+    </div>
+    <div class="bleg-item">
+      <div class="bleg-dot" style="background:#0369a1"></div>
+      GMAP Convergence
+    </div>
+    <div class="bleg-item">
+      <div class="bleg-dot" style="background:#b91c1c"></div>
+      Exit Legacy Platform
+    </div>
+    <div class="bleg-item">
+      <div class="bleg-dot" style="background:#15803d"></div>
+      Baltics Fiscalization
+    </div></div>
+        <div class="chart-note">X = Business Impact &nbsp;·&nbsp; Y = Strategic Fit</div>
+        <button onclick="resetEmmChart()" style="
+          background:none;border:1px solid var(--border);color:var(--text-muted);
+          border-radius:6px;padding:5px 12px;font-size:11px;cursor:pointer;margin-top:10px;
+          font-family:'DM Mono',sans-serif;
+        ">✎ Edit scores</button>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:0">
+      <div class="card-title">Solutions by Status</div>
+      <div class="chart-wrap"><canvas id="horizonDonut" width="617" height="280" style="display: block; box-sizing: border-box; height: 280px; width: 617px;"></canvas></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="row-2" style="margin-bottom:0">
+    <div class="card" style="margin-bottom:0">
+      <div class="card-title">Top Risks</div>
+      <div class="risk-list"></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card" style="margin-bottom:0">
+    <div class="card-title">FY27 Focus Priorities</div>
+    <div id="focus-priorities-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PRODUCT ═══════════════════════════════ -->
+<div id="view-product" class="view">
+  <div class="vhdr">
+    <div class="vtitle">Roadmap &amp; Priorities</div>
+    <div class="vdesc">Now-Next-Later view across all journey domains with opportunity confidence and PM ownership</div>
+  </div>
+
+  <div class="filters">
+    <button class="fbtn active" onclick="filterDomains(this,'all')">All Domains</button>
+    <button class="fbtn" onclick="filterDomains(this,'evidenced')">Evidenced Opportunities</button>
+    <button class="fbtn" onclick="filterDomains(this,'directional')">Directional Signal</button>
+    <button class="fbtn" onclick="filterDomains(this,'live')">Has Live Solutions</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Now · Next · Later</div>
+    <div style="overflow-x:auto">
+      <div class="nnl-header">
+        <div class="nnl-hcell prod">Journey Domain</div>
+        <div class="nnl-hcell now">▶ Now</div>
+        <div class="nnl-hcell next">→ Next</div>
+        <div class="nnl-hcell later">◎ Later</div>
+      </div>
+      <div class="nnl-body" id="nnl-body">
+    <div class="nnl-row">
+      <div class="nnl-cell">
+        <div class="nnl-pname">Roaming Experience</div>
+        <div class="nnl-pstage">Roaming PM</div>
+      </div>
+      <div class="nnl-cell"><span class="chip">OCPI roaming evaluation</span></div>
+      <div class="nnl-cell"><span class="chip">Transparent pricing before start</span></div>
+      <div class="nnl-cell"><span class="chip">Roaming-native UX parity</span></div>
+    </div>
+    <div class="nnl-row">
+      <div class="nnl-cell">
+        <div class="nnl-pname">Get to Station &amp; Start</div>
+        <div class="nnl-pstage">Session Start PM</div>
+      </div>
+      <div class="nnl-cell"><span class="chip">Autocharge live</span><span class="chip">In-app status</span></div>
+      <div class="nnl-cell"><span class="chip">Ad-hoc QR/NFC start</span><span class="chip">Live map availability</span></div>
+      <div class="nnl-cell"><span class="chip">Plug &amp; Charge (ISO 15118-20)</span></div>
+    </div>
+    <div class="nnl-row">
+      <div class="nnl-cell">
+        <div class="nnl-pname">Charging Session</div>
+        <div class="nnl-pstage">Session PM</div>
+      </div>
+      <div class="nnl-cell"><span class="chip">Live session dashboard</span></div>
+      <div class="nnl-cell"><span class="chip">Push notifications (milestones + anomalies)</span><span class="chip">Error recovery flows</span></div>
+      <div class="nnl-cell"><span class="chip">One-tap support</span><span class="chip">Auto retry</span><span class="chip">In-car display</span></div>
+    </div>
+    <div class="nnl-row">
+      <div class="nnl-cell">
+        <div class="nnl-pname">GMAP Convergence &amp; Commercial</div>
+        <div class="nnl-pstage">Convergence PM</div>
+      </div>
+      <div class="nnl-cell"><span class="chip">B2C Convergence scoping (4.2)</span><span class="chip">Marketing brief submitted Mar FY26</span><span class="chip">Tap &amp; Pay launch LV/LT (pre-GMAP)</span></div>
+      <div class="nnl-cell"><span class="chip">In-session commercial engagement</span><span class="chip">Clear GMAP front-end dependencies</span></div>
+      <div class="nnl-cell"><span class="chip">Full GMAP convergence</span><span class="chip">Store traffic integration</span></div>
+    </div>
+    <div class="nnl-row">
+      <div class="nnl-cell">
+        <div class="nnl-pname">Attract</div>
+        <div class="nnl-pstage">Madhav</div>
+      </div>
+      <div class="nnl-cell"><span class="chip">Webmaps for 1CP</span><span class="chip">Pilot: 4screen</span><span class="chip">Pilot: Here Maps</span><span class="chip">Pilot: Cirrantic</span></div>
+      <div class="nnl-cell"><span class="chip">Route planner</span></div>
+      <div class="nnl-cell"><span class="chip">Converge webmaps with Global Store Locator</span></div>
+    </div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ═══════════════════════════ SOLUTIONS PIPELINE ════════════════════ -->
+<div id="view-engineering" class="view active">
+  <div class="vhdr">
+    <div class="vtitle">Solutions Pipeline</div>
+    <div class="vdesc">All solutions across the B2C journey, organised by status. Add, edit, and remove initiatives in each lane.</div>
+  </div>
+
+  <!-- KPI counters — updated dynamically -->
+  <div class="row-3" style="margin-bottom:24px;grid-template-columns:repeat(4,1fr)">
+    <div class="kpi green">
+      <div class="kpi-lbl">Live</div>
+      <div class="kpi-val" id="kpi-live">4</div>
+      <div class="kpi-sub">Implemented &amp; operating</div>
+    </div>
+    <div class="kpi blue">
+      <div class="kpi-lbl">In Development</div>
+      <div class="kpi-val" id="kpi-dev">1</div>
+      <div class="kpi-sub">Under development</div>
+    </div>
+    <div class="kpi purple">
+      <div class="kpi-lbl">Evaluation</div>
+      <div class="kpi-val" id="kpi-eval">2</div>
+      <div class="kpi-sub">Under active assessment</div>
+    </div>
+    <div class="kpi" style="border-top:3px solid var(--gray)">
+      <div class="kpi-lbl">Discovery</div>
+      <div class="kpi-val" id="kpi-disc">0</div>
+      <div class="kpi-sub">Hypothesis — not yet validated</div>
+    </div>
+  </div>
+
+  <!-- Add initiative form -->
+  <div class="card" id="add-sol-card" style="margin-bottom:24px;border:1.5px dashed var(--border)">
+    <div class="card-title" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+      <span>Solutions Pipeline</span>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button onclick="exportToExcel()" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px" title="Export all initiatives to Excel">⬇ Export</button>
+        <label style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:6px;padding:5px 14px;font-size:12px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;gap:5px;margin:0" title="Import initiatives from Excel">⬆ Import<input type="file" id="import-file" accept=".xlsx,.xls" onchange="importFromExcel(event)" style="display:none"></label>
+        <span id="import-feedback" style="font-size:11px;color:var(--green);display:none;font-family:'DM Mono',monospace"></span>
+        <button onclick="toggleAddForm()" id="add-form-toggle" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:5px 14px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">+ New</button>
+      </div>
+    </div>
+    <div id="add-sol-form" style="display:none;margin-top:4px">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:5px">Initiative title *</label>
+          <input id="sol-title" placeholder="e.g. Autocharge (ISO 15118-2)" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:5px">Domain</label>
+          <input id="sol-domain" placeholder="e.g. Get to Station &amp; Start" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:5px">Status *</label>
+          <select id="sol-status" onchange="onStatusChange()" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;cursor:pointer" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+            <option value="live">Live — Implemented &amp; operating</option>
+            <option value="dev">In Development — Under development</option>
+            <option value="eval">Evaluation — Under active assessment</option>
+            <option value="disc">Discovery — Hypothesis, not yet validated</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Market selector — visible for Live only -->
+      <div id="mkt-selector-wrap" class="mkt-selector">
+        <div class="mkt-selector-title">Markets</div>
+        <!-- Segmented mode control -->
+        <div style="display:flex;gap:0;margin-bottom:14px;border:1.5px solid var(--border);border-radius:7px;overflow:hidden;width:fit-content">
+          <button type="button" id="mkt-mode-l8" onclick="setMktMode('l8')" class="mkt-mode-btn mkt-mode-active">🌍 All L8</button>
+          <button type="button" id="mkt-mode-m4" onclick="setMktMode('m4')" class="mkt-mode-btn" style="border-left:1.5px solid var(--border);border-right:1.5px solid var(--border)">🌍 All M4</button>
+          <button type="button" id="mkt-mode-cus" onclick="setMktMode('custom')" class="mkt-mode-btn">Custom</button>
+        </div>
+        <!-- Custom picker — hidden unless Custom mode active -->
+        <div id="mkt-custom-picker" style="display:none">
+          <div class="mkt-group-label">L8</div>
+          <div class="mkt-checkboxes" id="mkt-l8">
+            <label class="mkt-cb-label" data-code="NO" onclick="toggleMkt(this)">🇳🇴 NO</label>
+            <label class="mkt-cb-label" data-code="SE" onclick="toggleMkt(this)">🇸🇪 SE</label>
+            <label class="mkt-cb-label" data-code="DK" onclick="toggleMkt(this)">🇩🇰 DK</label>
+            <label class="mkt-cb-label" data-code="PL" onclick="toggleMkt(this)">🇵🇱 PL</label>
+            <label class="mkt-cb-label" data-code="EE" onclick="toggleMkt(this)">🇪🇪 EE</label>
+            <label class="mkt-cb-label" data-code="IE" onclick="toggleMkt(this)">🇮🇪 IE</label>
+            <label class="mkt-cb-label" data-code="LV" onclick="toggleMkt(this)">🇱🇻 LV</label>
+            <label class="mkt-cb-label" data-code="LT" onclick="toggleMkt(this)">🇱🇹 LT</label>
+          </div>
+          <div class="mkt-group-label">M4</div>
+          <div class="mkt-checkboxes" id="mkt-m4">
+            <label class="mkt-cb-label" data-code="DE" onclick="toggleMkt(this)">🇩🇪 DE</label>
+            <label class="mkt-cb-label" data-code="BE" onclick="toggleMkt(this)">🇧🇪 BE</label>
+            <label class="mkt-cb-label" data-code="LU" onclick="toggleMkt(this)">🇱🇺 LU</label>
+            <label class="mkt-cb-label" data-code="NL" onclick="toggleMkt(this)">🇳🇱 NL</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-bottom:14px">
+        <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:5px">Description</label>
+        <textarea id="sol-desc" rows="2" placeholder="Brief description of this initiative, constraints, or current status…" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);resize:vertical;outline:none" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+      </div>
+      <div style="display:flex;gap:8px">
+        <button onclick="addSolution()" style="background:var(--accent);color:#fff;border:none;border-radius:6px;padding:8px 20px;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif">Add initiative</button>
+        <button onclick="toggleAddForm()" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:6px;padding:8px 14px;font-size:12px;cursor:pointer;font-family:'DM Sans',sans-serif">Cancel</button>
+        <span id="sol-error" style="font-size:12px;color:var(--red);align-self:center;display:none">Title is required.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Live lane -->
+  <div class="sol-section">
+    <div class="sol-section-hdr">
+      <span class="sol live">Live</span>
+      <span class="sol-section-title">Implemented &amp; Operating</span>
+      <span class="sol-count" id="cnt-live">4 solutions</span>
+    </div>
+    <div class="sol-cards" id="sol-live">
+        <div class="sol-card live-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(1)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(1)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">Autocharge</div>
+          <div class="sol-card-desc">Plug in, charging starts. No action required. Proven high satisfaction.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Charge</span>
+          </div>
+          <div class="mkt-row"><span class="mkt-tag">🇳🇴 NO</span><span class="mkt-tag">🇸🇪 SE</span><span class="mkt-tag">🇩🇰 DK</span><span class="mkt-tag">🇪🇪 EE</span></div>
+        </div>
+        <div class="sol-card live-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(2)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(2)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">CK Charge Mobile App</div>
+          <div class="sol-card-desc">B2C mobile application to find station, start/stop charging, onboard autocharge, see transactions etc. Proven high satisfaction.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Channel</span>
+          </div>
+          <div class="mkt-row"><span class="mkt-tag">🇳🇴 NO</span><span class="mkt-tag">🇸🇪 SE</span><span class="mkt-tag">🇩🇰 DK</span><span class="mkt-tag">🇪🇪 EE</span><span class="mkt-tag">🇵🇱 PL</span></div>
+        </div>
+        <div class="sol-card live-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(3)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(3)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">Tap &amp; Pay — Logos</div>
+          <div class="sol-card-desc">Customer can unregistered pay for charging session with their card or x-wallet. This solution does not have integration with Extra nor provides automatic reconciliation.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Payments</span>
+          </div>
+          <div class="mkt-row"><span class="mkt-tag">🇮🇪 IE</span></div>
+        </div>
+        <div class="sol-card live-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(4)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(4)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">Tap &amp; Pay — Adyen (S1U2)</div>
+          <div class="sol-card-desc">Customer can unregistered pay for charging session with their card or x-wallet. This solution has integration with Extra and provides automatic reconciliation.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Payments</span>
+          </div>
+          <div class="mkt-row"><span class="mkt-tag">🇳🇴 NO</span><span class="mkt-tag">🇸🇪 SE</span><span class="mkt-tag">🇩🇰 DK</span><span class="mkt-tag">🇪🇪 EE</span></div>
+        </div></div>
+  </div>
+
+  <!-- Evaluation lane -->
+  <div class="sol-section">
+    <div class="sol-section-hdr">
+      <span class="sol dev">In Development</span>
+      <span class="sol-section-title">Under Development</span>
+      <span class="sol-count" id="cnt-dev">1 solution</span>
+    </div>
+    <div class="sol-cards" id="sol-dev">
+        <div class="sol-card dev-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(5)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(5)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">GMAP Convergence</div>
+          <div class="sol-card-desc">One integrated experience that delivers the market's easiest and most rewarding EV-charging experience while unifying customer experience across all CK functions. Effortless Charging: ≥70% of users start charging in ≤60 seconds. Customer Love: NPS ≥60 for charging sessions. Migration Success: ≥90% EV users migrate with same retention levels. Market Growth: 300k+ incremental MAUs on CK App; ≥163K monthly transactions.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Convergence</span>
+          </div>
+          
+        </div></div>
+  </div>
+
+  <!-- Evaluation lane -->
+  <div class="sol-section">
+    <div class="sol-section-hdr">
+      <span class="sol eval">Evaluation</span>
+      <span class="sol-section-title">Under Active Assessment</span>
+      <span class="sol-count" id="cnt-eval">2 solutions</span>
+    </div>
+    <div class="sol-cards" id="sol-eval">
+        <div class="sol-card eval-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(6)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(6)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">Car dealership giftcard acquisition pilot</div>
+          <div class="sol-card-desc">Micro-testing a giftcard initiative in partnership with car dealerships. Hypothesis: introducing Circle K to EV drivers at point of new car pickup drives first charging sessions and app downloads. Success measured by giftcard redemption, store visits, and Charge app downloads.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Partnerships</span>
+          </div>
+          
+        </div>
+        <div class="sol-card eval-card" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(7)" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(7)" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">Migrate M4 Payment terminal to EV One</div>
+          <div class="sol-card-desc">Evaluation of migrating M4 market payment terminals to the EV One platform. Scope, dependencies, and feasibility under active assessment.</div>
+          <div class="sol-card-meta">
+            <span class="sol-card-domain">Payments</span>
+          </div>
+          
+        </div></div>
+  </div>
+
+  <!-- Discovery lane -->
+  <div class="sol-section">
+    <div class="sol-section-hdr">
+      <span class="sol disc">Discovery</span>
+      <span class="sol-section-title">Hypothesis — Not Yet Validated</span>
+      <span class="sol-count" id="cnt-disc">0 solutions</span>
+    </div>
+    <div class="sol-cards" id="sol-disc"><div style="width:100%;padding:28px;text-align:center;color:var(--text-muted);font-size:13px;border:1.5px dashed var(--border);border-radius:var(--r)">No discovery initiatives yet — add one above.</div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ RISK REGISTER ════════════════════════ -->
+<div id="view-risk" class="view">
+  <div class="vhdr">
+    <div class="vtitle">Product Risk Register</div>
+    <div class="vdesc">Risk assessment across the four dimensions — Value, Usability, Feasibility, and Business Viability — mapped to each journey domain</div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title">Risk Framework Reference (Cagan)</div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:200px;padding:12px;background:var(--surface-2);border-radius:var(--r);border-left:3px solid var(--amber)">
+        <div style="font-size:11px;font-weight:700;color:var(--amber);text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace;margin-bottom:4px">Value Risk</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Will customers choose to use it? Owner: Product Manager</div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:12px;background:var(--surface-2);border-radius:var(--r);border-left:3px solid var(--blue)">
+        <div style="font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace;margin-bottom:4px">Usability Risk</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Can users figure out how to use it? Owner: Product Designer</div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:12px;background:var(--surface-2);border-radius:var(--r);border-left:3px solid var(--purple)">
+        <div style="font-size:11px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace;margin-bottom:4px">Feasibility Risk</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Can we build it? Technical capability &amp; constraints. Owner: Lead Engineer</div>
+      </div>
+      <div style="flex:1;min-width:200px;padding:12px;background:var(--surface-2);border-radius:var(--r);border-left:3px solid var(--red)">
+        <div style="font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace;margin-bottom:4px">Viability Risk</div>
+        <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Does it work for the business? GTM, cost, legal, brand. Owner: Product Manager</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:0">
+    <div class="card-title">Risk Assessment by Opportunity</div>
+    <table>
+      <thead>
+        <tr><th>Opportunity</th><th>Domain</th><th>Risk Type</th><th>Severity</th><th>Description</th><th>Mitigation</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Roaming experience opacity</strong></td>
+          <td><small>Roaming</small></td>
+          <td><span class="risk-type value">Value</span></td>
+          <td><span class="risk-pill medium">Medium</span></td>
+          <td><small>Pricing opacity and authentication inconsistency for non-native users creates distrust and discourages repeat use.</small></td>
+          <td><small>OCPI-based roaming improvements in evaluation. Transparent pricing pre-session is unexplored.</small></td>
+        </tr>
+        <tr>
+          <td><strong>Plug &amp; Charge (ISO 15118-20)</strong></td>
+          <td><small>Get to Station &amp; Start</small></td>
+          <td><span class="risk-type feasibility">Feasibility</span></td>
+          <td><span class="risk-pill medium">Medium</span></td>
+          <td><small>Certificate-based authentication requires vehicle OEM adoption and charger firmware updates. External dependency not within Circle K's control.</small></td>
+          <td><small>Evaluation stage. Monitor OEM adoption curves. ISO 15118-2 (MAC-based) already live as interim.</small></td>
+        </tr>
+        <tr>
+          <td><strong>In-car display integration</strong></td>
+          <td><small>Charging Session</small></td>
+          <td><span class="risk-type feasibility">Feasibility</span></td>
+          <td><span class="risk-pill low">Low</span></td>
+          <td><small>Requires OCPP session data combined with vehicle API access. Both are externally dependent and market is fragmented across OEMs.</small></td>
+          <td><small>Discovery only. Not a near-term priority. Monitor standardisation progress.</small></td>
+        </tr>
+        <tr>
+          <td><strong>1CP resource re-prioritisation</strong></td>
+          <td><small>Programme-level</small></td>
+          <td><span class="risk-type viability">Viability</span></td>
+          <td><span class="risk-pill high">High</span></td>
+          <td><small>Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined.</small></td>
+          <td><small>Escalate to eMM. Clarify which B2C GVSL items are at risk and reprioritise accordingly.</small></td>
+        </tr>
+        <tr>
+          <td><strong>GMAP convergence — customer migration &amp; GTM</strong></td>
+          <td><small>GMAP Convergence &amp; Commercial</small></td>
+          <td><span class="risk-type viability">Viability</span></td>
+          <td><span class="risk-pill high">High</span></td>
+          <td><small>Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed.</small></td>
+          <td><small>Define migration plan and rollback strategy. Validate GTM approach before full rollout. Phased market launch (Latvia/Lithuania Tap &amp; Pay first) agreed as interim mitigation.</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ SCRIPTS ═══════════════════════════════ -->
+<script>
+function downloadSelf(){
+  const html = document.documentElement.outerHTML;
+  const blob = new Blob(['<!DOCTYPE html>\n' + html], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'ck-emobility-portfolio-strategy.html';
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+// ── Data ─────────────────────────────────────────────────────────────
+const DOMAINS = [
+  {
+    id:'roaming', name:'Roaming Experience', pm:'Roaming PM', initials:'RM',
+    status:'amber', statusLabel:'Directional',
+    confidence:'directional',
+    opp:1, live:0, eval:1,
+    stratImpact:7, friction:6,
+    m1:{label:'Opportunities',val:'1'}, m2:{label:'Solutions',val:'1 eval'},
+    now:'OCPI roaming evaluation', next:'Transparent pricing before start', later:'Roaming-native UX parity',
+    note:'Directional evidence on pricing opacity. Deeper discovery needed.',
+    desc:'MSP and CPO perspectives across Nordic markets. Focused on interoperability, pricing transparency, and cross-network trust for non-native users.'
+  },
+  {
+    id:'start', name:'Get to Station & Start', pm:'Session Start PM', initials:'SS',
+    status:'red', statusLabel:'High Priority',
+    confidence:'evidenced',
+    opp:2, live:2, eval:3,
+    stratImpact:10, friction:9,
+    m1:{label:'Opportunities',val:'2'}, m2:{label:'Solutions',val:'2 live · 3 eval'},
+    now:'Autocharge live · In-app status', next:'Ad-hoc QR/NFC start · Live map availability', later:'Plug & Charge (ISO 15118-20)',
+    note:'Most evidenced friction point. Autocharge is live and performing. Gaps remain for non-registered and roaming users.',
+    desc:'Maps, navigation, station discovery, session start, authentication, and payment. The highest-friction domain. Autocharge establishes the baseline; gaps remain for ad-hoc and roaming users.'
+  },
+  {
+    id:'session', name:'Charging Session', pm:'Session PM', initials:'CS',
+    status:'amber', statusLabel:'In Progress',
+    confidence:'directional',
+    opp:2, live:1, eval:2,
+    stratImpact:8, friction:7,
+    m1:{label:'Opportunities',val:'2'}, m2:{label:'Solutions',val:'1 live · 2 eval'},
+    now:'Live session dashboard', next:'Push notifications (milestones + anomalies) · Error recovery flows', later:'One-tap support · Auto retry · In-car display',
+    note:'Session dashboard is live but incomplete. Error recovery is the outstanding high-risk gap.',
+    desc:'Monitoring session status, stopping charging, receipts, and transparency. Session dashboard is live; error recovery and proactive communication remain in evaluation.'
+  },
+  {
+    id:'convergence', name:'GMAP Convergence & Commercial', pm:'Convergence PM', initials:'AC',
+    status:'blue', statusLabel:'Planning',
+    confidence:'hypothesis',
+    opp:1, live:0, eval:1,
+    stratImpact:9, friction:5,
+    m1:{label:'Opportunities',val:'1'}, m2:{label:'Solutions',val:'1 eval'},
+    now:'B2C Convergence scoping (4.2) · Marketing brief submitted Mar FY26 · Tap & Pay launch LV/LT (pre-GMAP)', next:'In-session commercial engagement · Clear GMAP front-end dependencies', later:'Full GMAP convergence · Store traffic integration',
+    note:'Strong strategic upside. Evidence base on commercial impact is hypothesis-stage. Discovery in progress.',
+    desc:'Converging the Circle K Charge app into the main Circle K app. Enables store visits per session metric and long-term customer lifetime value uplift.'
+  },
+  {
+    id:'attract', name:'Attract', pm:'Madhav', initials:'MA',
+    status:'amber', statusLabel:'In Progress',
+    confidence:'directional',
+    opp:1, live:1, eval:3,
+    stratImpact:7, friction:5,
+    m1:{label:'Opportunities',val:'1'}, m2:{label:'Solutions',val:'1 live · 3 eval'},
+    now:'Webmaps for 1CP · Pilot: 4screen · Pilot: Here Maps · Pilot: Cirrantic', next:'Route planner', later:'Converge webmaps with Global Store Locator',
+    note:'Active pilots underway across multiple map platforms. Route planner is the key next unlock.',
+    desc:'Attracting EV drivers to Circle K stations through map visibility, in-car navigation, and digital presence across third-party platforms.'
+  }
+];
+
+// ── Solutions pipeline — user-generated CRUD ──────────────────────────
+let ALL_SOLUTIONS = [
+  { id: 1, title: 'Autocharge', domain: 'Charge', status: 'live', markets: ['NO','SE','DK','EE'], desc: 'Plug in, charging starts. No action required. Proven high satisfaction.' },
+  { id: 2, title: 'CK Charge Mobile App', domain: 'Channel', status: 'live', markets: ['NO','SE','DK','EE','PL'], desc: 'B2C mobile application to find station, start/stop charging, onboard autocharge, see transactions etc. Proven high satisfaction.' },
+  { id: 3, title: 'Tap & Pay — Logos', domain: 'Payments', status: 'live', markets: ['IE'], desc: 'Customer can unregistered pay for charging session with their card or x-wallet. This solution does not have integration with Extra nor provides automatic reconciliation.' },
+  { id: 4, title: 'Tap & Pay — Adyen (S1U2)', domain: 'Payments', status: 'live', markets: ['NO','SE','DK','EE'], desc: 'Customer can unregistered pay for charging session with their card or x-wallet. This solution has integration with Extra and provides automatic reconciliation.' },
+  { id: 5, title: 'GMAP Convergence', domain: 'Convergence', status: 'dev', markets: ['NO','SE','DK','PL','EE','LV','LT','DE','BE','LU','NL'], desc: 'One integrated experience that delivers the market\'s easiest and most rewarding EV-charging experience while unifying customer experience across all CK functions. Effortless Charging: ≥70% of users start charging in ≤60 seconds. Customer Love: NPS ≥60 for charging sessions. Migration Success: ≥90% EV users migrate with same retention levels. Market Growth: 300k+ incremental MAUs on CK App; ≥163K monthly transactions.' },
+  { id: 6, title: 'Car dealership giftcard acquisition pilot', domain: 'Partnerships', status: 'eval', markets: [], desc: 'Micro-testing a giftcard initiative in partnership with car dealerships. Hypothesis: introducing Circle K to EV drivers at point of new car pickup drives first charging sessions and app downloads. Success measured by giftcard redemption, store visits, and Charge app downloads.' },
+  { id: 7, title: 'Migrate M4 Payment terminal to EV One', domain: 'Payments', status: 'eval', markets: [], desc: 'Evaluation of migrating M4 market payment terminals to the EV One platform. Scope, dependencies, and feasibility under active assessment.' },
+  { id: 8, title: 'Inbound Roaming', domain: 'Attract', status: 'live', markets: ['NO','SE','DK'], desc: 'Active eMSP connections enabling customers from partner networks to charge at Circle K stations. Connected eMSPs: Elton (NO, SE, DK), Mer (SE), Radius (IE), Ayvens (NO), NFL (NO).' },
+  { id: 9, title: 'Show 1M chargepoints and prices in GMAP', domain: '1CP', status: 'dev', markets: ['NO','SE','DK','PL','EE','IE','LV','LT'], desc: 'With your card from CK, you can charge domestically and cross-border in all these countries. Use maps to see where to charge — surfacing 1M+ chargepoints with live pricing across the roaming network directly inside the Circle K app.' },
+  { id: 10, title: 'Show 1M chargepoints and prices in Webmap', domain: '1CP', status: 'dev', markets: ['NO','SE','DK','PL','EE','IE','LV','LT'], desc: 'With your card from CK, you can charge domestically and cross-border in all these countries. Use maps to see where to charge — surfacing 1M+ chargepoints with live pricing across the roaming network on the Circle K web map.' }
+];
+let editingId = null;
+
+// ── Fallback data for exec tab (overridden by data.json when served via server) ──
+const DEFAULT_TOP_RISKS = [
+  { id:'tr1', severity:'high', title:'1CP Resource Re-prioritisation — Viability Risk', desc:'Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined.' },
+  { id:'tr2', severity:'high', title:'GMAP Convergence — Customer Migration & GTM Risk', desc:'Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed. Phased market launch (Latvia/Lithuania Tap & Pay first) agreed as interim mitigation.' }
+];
+
+const DEFAULT_FOCUS_PRIORITIES = [
+  { id:'fp1', icon:'🚗', title:'Drive New Customer Growth', desc:'Increase visibility in maps and in-car navigation. Leverage converged Charge App / GMAP journey. Activate new strategic partnerships.', color:'green' },
+  { id:'fp2', icon:'🇩🇰', title:'Sharpen Denmark Traction', desc:'Enable stronger strategy execution and market penetration in Denmark, where traction lags Norway and Sweden.', color:'amber' },
+  { id:'fp3', icon:'📣', title:'Strengthen Brand Equity', desc:"New comms campaign aligned to 'Make Your Day' brand platform. New EV B2C marketing toolkit briefed Q4 FY26, live in SCA approx Q2/3 FY27.", color:'blue' },
+  { id:'fp4', icon:'🔌', title:'Invest and Launch Plug & Charge', desc:'Committed FY27 priority. Certificate-based session start removes the last authentication friction point for registered users.', color:'purple' }
+];
+
+function renderTopRisks(risks) {
+  const riskList = document.querySelector('.risk-list');
+  if (!riskList) return;
+  riskList.innerHTML = risks.map(r => `
+    <div class="risk">
+      <div class="risk-sev ${r.severity}">${r.severity.charAt(0).toUpperCase()+r.severity.slice(1)}</div>
+      <div>
+        <div class="risk-title">${r.title}</div>
+        <div class="risk-desc">${r.desc}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderFocusPriorities(priorities) {
+  const fpGrid = document.getElementById('focus-priorities-grid');
+  if (!fpGrid) return;
+  const borderColors = { green:'var(--green)', amber:'var(--amber)', blue:'var(--blue)', purple:'var(--purple)', red:'var(--red)' };
+  fpGrid.innerHTML = priorities.map(p => `
+    <div style="padding:14px;background:var(--surface-2);border-radius:var(--r);border-left:3px solid ${borderColors[p.color]||'var(--green)'}">
+      <div style="font-size:12px;font-weight:600;margin-bottom:6px">${p.icon || ''} ${p.title}</div>
+      <div style="font-size:12px;color:var(--text-muted);line-height:1.6">${p.desc}</div>
+    </div>`).join('');
+}
+
+const L8 = ['NO','SE','DK','PL','EE','IE','LV','LT'];
+const M4 = ['DE','BE','LU','NL'];
+const MKT_FLAGS = { NO:'🇳🇴', SE:'🇸🇪', DK:'🇩🇰', PL:'🇵🇱', EE:'🇪🇪', IE:'🇮🇪', LV:'🇱🇻', LT:'🇱🇹', DE:'🇩🇪', BE:'🇧🇪', LU:'🇱🇺', NL:'🇳🇱' };
+
+let mktMode = 'l8'; // 'l8' | 'm4' | 'custom'
+
+function onStatusChange() {
+  const status = document.getElementById('sol-status').value;
+  document.getElementById('mkt-selector-wrap').style.display = status === 'live' ? 'block' : 'none';
+}
+
+function setMktMode(mode) {
+  mktMode = mode;
+  // Update button active states
+  ['l8','m4','cus'].forEach(m => {
+    document.getElementById('mkt-mode-' + m).classList.remove('mkt-mode-active');
+  });
+  const btnId = mode === 'custom' ? 'mkt-mode-cus' : 'mkt-mode-' + mode;
+  document.getElementById(btnId).classList.add('mkt-mode-active');
+  // Show/hide custom picker
+  document.getElementById('mkt-custom-picker').style.display = mode === 'custom' ? 'block' : 'none';
+  // If switching TO custom, pre-tick the relevant group so selections are preserved
+  if (mode === 'custom') {
+    // no auto-selection — user picks from scratch, or retains previous custom state
+  }
+}
+
+function toggleMkt(labelEl) {
+  labelEl.classList.toggle('checked');
+}
+
+function getSelectedMarkets() {
+  if (mktMode === 'l8') return [...L8];
+  if (mktMode === 'm4') return [...M4];
+  // custom
+  return [...document.querySelectorAll('#mkt-custom-picker .mkt-cb-label.checked')]
+    .map(el => el.dataset.code);
+}
+
+function setSelectedMarkets(codes) {
+  // Determine which mode to restore
+  const allL8 = L8.every(c => codes.includes(c));
+  const allM4 = M4.every(c => codes.includes(c));
+  const onlyL8 = allL8 && codes.every(c => L8.includes(c));
+  const onlyM4 = allM4 && codes.every(c => M4.includes(c));
+
+  if (onlyL8) {
+    setMktMode('l8');
+  } else if (onlyM4) {
+    setMktMode('m4');
+  } else {
+    setMktMode('custom');
+    document.querySelectorAll('#mkt-custom-picker .mkt-cb-label').forEach(el => {
+      el.classList.toggle('checked', codes.includes(el.dataset.code));
+    });
+  }
+}
+
+function resetMarkets() {
+  mktMode = 'l8';
+  setMktMode('l8');
+  document.querySelectorAll('#mkt-custom-picker .mkt-cb-label').forEach(el => el.classList.remove('checked'));
+}
+
+function marketTagsHtml(markets) {
+  if (!markets || markets.length === 0) return '';
+  const allL8 = L8.every(c => markets.includes(c));
+  const allM4 = M4.every(c => markets.includes(c));
+  const onlyL8 = allL8 && markets.every(c => L8.includes(c));
+  const onlyM4 = allM4 && markets.every(c => M4.includes(c));
+  if (onlyL8) return `<span class="mkt-group-tag">🌍 L8</span>`;
+  if (onlyM4) return `<span class="mkt-group-tag">🌍 M4</span>`;
+  const tags = [];
+  if (allL8) {
+    tags.push(`<span class="mkt-group-tag">🌍 L8</span>`);
+    markets.filter(c => !L8.includes(c)).forEach(c => tags.push(`<span class="mkt-tag">${MKT_FLAGS[c]} ${c}</span>`));
+  } else if (allM4) {
+    markets.filter(c => !M4.includes(c)).forEach(c => tags.push(`<span class="mkt-tag">${MKT_FLAGS[c]} ${c}</span>`));
+    tags.push(`<span class="mkt-group-tag">🌍 M4</span>`);
+  } else {
+    markets.forEach(c => tags.push(`<span class="mkt-tag">${MKT_FLAGS[c]} ${c}</span>`));
+  }
+  return tags.join('');
+}
+
+function toggleAddForm() {
+  const form = document.getElementById('add-sol-form');
+  const btn  = document.getElementById('add-form-toggle');
+  const open = form.style.display === 'none';
+  form.style.display = open ? 'block' : 'none';
+  btn.textContent = open ? '✕ Close' : '+ New';
+  if (open) {
+    document.getElementById('sol-title').value  = '';
+    document.getElementById('sol-domain').value = '';
+    document.getElementById('sol-desc').value   = '';
+    document.getElementById('sol-status').value = 'live';
+    document.getElementById('sol-error').style.display = 'none';
+    document.getElementById('mkt-selector-wrap').style.display = 'block';
+    resetMarkets();
+    editingId = null;
+    document.getElementById('sol-title').focus();
+  }
+}
+
+function addSolution() {
+  const title   = document.getElementById('sol-title').value.trim();
+  const domain  = document.getElementById('sol-domain').value.trim();
+  const desc    = document.getElementById('sol-desc').value.trim();
+  const status  = document.getElementById('sol-status').value;
+  const markets = status === 'live' ? getSelectedMarkets() : [];
+  const errEl   = document.getElementById('sol-error');
+
+  if (!title) { errEl.style.display = 'inline'; return; }
+  errEl.style.display = 'none';
+
+  if (editingId !== null) {
+    const idx = ALL_SOLUTIONS.findIndex(s => s.id === editingId);
+    if (idx > -1) ALL_SOLUTIONS[idx] = { id: editingId, title, domain, desc, status, markets };
+    editingId = null;
+  } else {
+    ALL_SOLUTIONS.push({ id: Date.now(), title, domain, desc, status, markets });
+  }
+
+  toggleAddForm();
+  renderSolutions();
+}
+
+function deleteSolution(id) {
+  ALL_SOLUTIONS = ALL_SOLUTIONS.filter(s => s.id !== id);
+  renderSolutions();
+}
+
+function editSolution(id) {
+  const s = ALL_SOLUTIONS.find(s => s.id === id);
+  if (!s) return;
+  editingId = id;
+  const form = document.getElementById('add-sol-form');
+  const btn  = document.getElementById('add-form-toggle');
+  form.style.display = 'block';
+  btn.textContent = '✕ Close';
+  document.getElementById('sol-title').value  = s.title;
+  document.getElementById('sol-domain').value = s.domain;
+  document.getElementById('sol-desc').value   = s.desc;
+  document.getElementById('sol-status').value = s.status;
+  document.getElementById('sol-error').style.display = 'none';
+  const mktWrap = document.getElementById('mkt-selector-wrap');
+  mktWrap.style.display = s.status === 'live' ? 'block' : 'none';
+  resetMarkets();
+  if (s.status === 'live' && s.markets) setSelectedMarkets(s.markets);
+  document.getElementById('sol-title').focus();
+  document.getElementById('add-sol-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+const DCOLORS = {
+  amber:'#f59e0b', red:'#f87171', blue:'#38bdf8', green:'#34d399', purple:'#a78bfa', gray:'#64748b'
+};
+const STATUSCOLOR = { amber:'#b45309', red:'#b91c1c', blue:'#0369a1', green:'#15803d' };
+
+// ── View switching ────────────────────────────────────────────────────
+function showView(btn, name) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.nbtn').forEach(b => b.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── Domain filter ─────────────────────────────────────────────────────
+function filterDomains(btn, filter) {
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  let list;
+  if (filter === 'all') list = DOMAINS;
+  else if (filter === 'evidenced') list = DOMAINS.filter(d => d.confidence === 'evidenced');
+  else if (filter === 'directional') list = DOMAINS.filter(d => d.confidence === 'directional');
+  else if (filter === 'live') list = DOMAINS.filter(d => d.live > 0);
+  renderNNL(list);
+}
+
+// ── NNL ────────────────────────────────────────────────────────────────
+function renderNNL(list) {
+  document.getElementById('nnl-body').innerHTML = list.map(d => `
+    <div class="nnl-row">
+      <div class="nnl-cell">
+        <div class="nnl-pname">${d.name}</div>
+        <div class="nnl-pstage">${d.pm}</div>
+      </div>
+      <div class="nnl-cell">${d.now.split(' · ').map(i=>`<span class="chip">${i}</span>`).join('')}</div>
+      <div class="nnl-cell">${d.next.split(' · ').map(i=>`<span class="chip">${i}</span>`).join('')}</div>
+      <div class="nnl-cell">${d.later.split(' · ').map(i=>`<span class="chip">${i}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+
+// ── Solutions pipeline — render ───────────────────────────────────────
+function renderSolutions() {
+  const buckets = { live: [], dev: [], eval: [], disc: [] };
+  ALL_SOLUTIONS.forEach(s => { if (buckets[s.status]) buckets[s.status].push(s); });
+
+  const clsMap   = { live: 'live-card', dev: 'dev-card', eval: 'eval-card', disc: 'disc-card' };
+  const emptyMsg = { live: 'No live initiatives yet — add one above.', dev: 'No initiatives in development yet — add one above.', eval: 'No evaluation initiatives yet — add one above.', disc: 'No discovery initiatives yet — add one above.' };
+
+  ['live','dev','eval','disc'].forEach(status => {
+    const list  = buckets[status];
+    const grid  = document.getElementById('sol-' + status);
+    const cntEl = document.getElementById('cnt-' + status);
+    const kpiEl = document.getElementById('kpi-' + status);
+    const cls   = clsMap[status];
+    const n     = list.length;
+
+    cntEl.textContent = n + ' ' + (n === 1 ? 'solution' : 'solutions');
+    if (kpiEl) kpiEl.textContent = n;
+
+    if (n === 0) {
+      grid.innerHTML = `<div style="width:100%;padding:28px;text-align:center;color:var(--text-muted);font-size:13px;border:1.5px dashed var(--border);border-radius:var(--r)">${emptyMsg[status]}</div>`;
+    } else {
+      grid.innerHTML = list.map(s => {
+        const mktHtml = (status === 'live' && s.markets && s.markets.length > 0)
+          ? `<div class="mkt-row">${marketTagsHtml(s.markets)}</div>` : '';
+        return `
+        <div class="sol-card ${cls}" style="position:relative">
+          <div style="position:absolute;top:10px;right:10px;display:flex;gap:6px">
+            <button onclick="editSolution(${s.id})" title="Edit" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✎</button>
+            <button onclick="deleteSolution(${s.id})" title="Remove" style="background:none;border:1px solid var(--border);color:var(--text-muted);border-radius:4px;padding:2px 7px;font-size:11px;cursor:pointer;font-family:'DM Mono',monospace">✕</button>
+          </div>
+          <div class="sol-card-title" style="padding-right:64px">${s.title}</div>
+          ${s.desc ? `<div class="sol-card-desc">${s.desc}</div>` : ''}
+          <div class="sol-card-meta">
+            ${s.domain ? `<span class="sol-card-domain">${s.domain}</span>` : ''}
+          </div>
+          ${mktHtml}
+        </div>`;
+      }).join('');
+    }
+  });
+
+  // Keep donut in sync with pipeline data
+  if (typeof renderDonut === 'function') renderDonut();
+}
+
+// ── Charts ────────────────────────────────────────────────────────────
+Chart.defaults.color = '#4b5e7a';
+Chart.defaults.borderColor = '#d1d9e6';
+
+// ── eMM scoring UI ────────────────────────────────────────────────────
+const EMM_INITIATIVES = [
+  { id:'roaming',     name:'1CP',                              color: STATUSCOLOR['amber'], x:10, y:8 },
+  { id:'session',     name:'Attractively present in-car nav',  color: STATUSCOLOR['amber'], x:7,  y:7 },
+  { id:'convergence', name:'GMAP Convergence',                 color: STATUSCOLOR['blue'],  x:10, y:9 },
+  { id:'legacy',      name:'Exit Legacy Platform',             color: STATUSCOLOR['red'],   x:8,  y:8 },
+  { id:'baltics',     name:'Baltics Fiscalization',            color: STATUSCOLOR['green'], x:3,  y:3 },
+];
+
+let emmChartInstance = null;
+
+function buildScoreRows() {
+  const container = document.getElementById('emmScoreRows');
+  container.innerHTML = EMM_INITIATIVES.map(ini => `
+    <div style="background:var(--surface-2);border:1px solid var(--border);border-radius:8px;padding:12px 14px;border-left:3px solid ${ini.color}">
+      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--text)">${ini.name}</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Business Impact <span id="bi-val-${ini.id}" style="color:var(--accent);font-weight:700">${ini.x}</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="${ini.x}" id="bi-${ini.id}"
+            oninput="document.getElementById('bi-val-${ini.id}').textContent=this.value"
+            style="width:100%;accent-color:${ini.color};cursor:pointer">
+        </div>
+        <div>
+          <label style="font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);display:block;margin-bottom:4px">
+            Strategic Fit <span id="sf-val-${ini.id}" style="color:var(--accent);font-weight:700">${ini.y}</span>/10
+          </label>
+          <input type="range" min="1" max="10" value="${ini.y}" id="sf-${ini.id}"
+            oninput="document.getElementById('sf-val-${ini.id}').textContent=this.value"
+            style="width:100%;accent-color:${ini.color};cursor:pointer">
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function plotEmmChart() {
+  const scores = EMM_INITIATIVES.map(ini => {
+    const biEl = document.getElementById('bi-' + ini.id);
+    const sfEl = document.getElementById('sf-' + ini.id);
+    return {
+      ...ini,
+      x: biEl ? parseInt(biEl.value) : ini.x,
+      y: sfEl ? parseInt(sfEl.value) : ini.y,
+    };
+  });
+
+  document.getElementById('emmScorePanel').style.display = 'none';
+  document.getElementById('emmChartWrap').style.display = 'block';
+
+  const ctx = document.getElementById('strategyMatrix').getContext('2d');
+  if (emmChartInstance) emmChartInstance.destroy();
+
+  emmChartInstance = new Chart(ctx, {
+    type: 'bubble',
+    data: {
+      datasets: scores.map(s => ({
+        label: s.name,
+        data: [{ x: s.x, y: s.y, r: 18 }],
+        backgroundColor: s.color + '33',
+        borderColor: s.color,
+        borderWidth: 2,
+      }))
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => {
+              const s = scores[ctx.datasetIndex];
+              return [`${s.name}`, `Business Impact: ${s.x}/10  ·  Strategic Fit: ${s.y}/10`];
+            }
+          }
+        }
+      },
+      scales: {
+        x: { min:0, max:11, title:{ display:true, text:'Business Impact', font:{size:12} }, grid:{color:'#d1d9e6'} },
+        y: { min:0, max:11, title:{ display:true, text:'Strategic Fit', font:{size:12} }, grid:{color:'#d1d9e6'} }
+      }
+    }
+  });
+
+  document.getElementById('bubbleLegend').innerHTML = scores.map(s => `
+    <div class="bleg-item">
+      <div class="bleg-dot" style="background:${s.color}"></div>
+      ${s.name}
+    </div>`).join('');
+}
+
+function resetEmmChart() {
+  if (emmChartInstance) { emmChartInstance.destroy(); emmChartInstance = null; }
+  document.getElementById('emmChartWrap').style.display = 'none';
+  document.getElementById('emmScorePanel').style.display = 'block';
+  buildScoreRows();
+}
+
+let donutChartInstance = null;
+
+function renderDonut() {
+  const counts = { live: 0, dev: 0, eval: 0, disc: 0 };
+  ALL_SOLUTIONS.forEach(s => { if (counts[s.status] !== undefined) counts[s.status]++; });
+
+  const labels = [
+    `Live (${counts.live})`,
+    `In Development (${counts.dev})`,
+    `Evaluation (${counts.eval})`,
+    `Discovery (${counts.disc})`
+  ];
+  const data   = [counts.live, counts.dev, counts.eval, counts.disc];
+  const bgColors     = ['rgba(52,211,153,.2)', 'rgba(3,105,161,.2)', 'rgba(167,139,250,.2)', 'rgba(100,116,139,.15)'];
+  const borderColors = ['#34d399', '#0369a1', '#a78bfa', '#64748b'];
+
+  const doCtx = document.getElementById('horizonDonut').getContext('2d');
+  if (donutChartInstance) {
+    donutChartInstance.data.labels = labels;
+    donutChartInstance.data.datasets[0].data = data;
+    donutChartInstance.update();
+  } else {
+    donutChartInstance = new Chart(doCtx, {
+      type: 'doughnut',
+      data: {
+        labels,
+        datasets: [{
+          data,
+          backgroundColor: bgColors,
+          borderColor: borderColors,
+          borderWidth: 2, hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '62%',
+        plugins: {
+          legend: {
+            position:'bottom',
+            labels:{ font:{size:11}, padding:14 }
+          }
+        }
+      }
+    });
+  }
+}
+
+function initCharts() {
+  buildScoreRows();
+  plotEmmChart();
+  renderDonut();
+}
+
+// ── Export to Excel ───────────────────────────────────────────────────
+function exportToExcel() {
+  if (ALL_SOLUTIONS.length === 0) {
+    alert('No initiatives to export yet. Add some first.');
+    return;
+  }
+
+  const rows = ALL_SOLUTIONS.map(s => ({
+    ID:          s.id,
+    Title:       s.title,
+    Domain:      s.domain || '',
+    Status:      s.status,
+    Markets:     (s.markets || []).join(', '),
+    Description: s.desc || ''
+  }));
+
+  const ws = XLSX.utils.json_to_sheet(rows);
+
+  // Column widths
+  ws['!cols'] = [
+    { wch: 16 },  // ID
+    { wch: 45 },  // Title
+    { wch: 30 },  // Domain
+    { wch: 14 },  // Status
+    { wch: 28 },  // Markets
+    { wch: 60 },  // Description
+  ];
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Solutions Pipeline');
+
+  const date = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `CK_Solutions_Pipeline_${date}.xlsx`);
+}
+
+// ── Import from Excel ─────────────────────────────────────────────────
+function importFromExcel(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = new Uint8Array(e.target.result);
+      const wb   = XLSX.read(data, { type: 'array' });
+      const ws   = wb.Sheets[wb.SheetNames[0]];
+      const rows = XLSX.utils.sheet_to_json(ws);
+
+      if (!rows.length) { alert('The file appears to be empty.'); return; }
+
+      // Validate — must have at least Title and Status columns
+      if (!rows[0].hasOwnProperty('Title') || !rows[0].hasOwnProperty('Status')) {
+        alert('Import failed: the file must have "Title" and "Status" columns.\nPlease use an exported file as your template.');
+        return;
+      }
+
+      const validStatuses = ['live','dev','eval','disc'];
+      const imported = rows.map(r => ({
+        id:      r.ID || Date.now() + Math.random(),
+        title:   (r.Title   || '').toString().trim(),
+        domain:  (r.Domain  || '').toString().trim(),
+        status:  validStatuses.includes((r.Status || '').toString().trim()) ? r.Status.toString().trim() : 'disc',
+        markets: r.Markets ? r.Markets.toString().split(',').map(m => m.trim()).filter(Boolean) : [],
+        desc:    (r.Description || '').toString().trim(),
+      })).filter(s => s.title); // drop rows with no title
+
+      if (!imported.length) { alert('No valid rows found in the file.'); return; }
+
+      // Confirm before overwriting
+      if (ALL_SOLUTIONS.length > 0) {
+        const ok = confirm(`This will replace your current ${ALL_SOLUTIONS.length} initiative(s) with ${imported.length} from the file. Continue?`);
+        if (!ok) { event.target.value = ''; return; }
+      }
+
+      ALL_SOLUTIONS = imported;
+      renderSolutions();
+
+      // Feedback
+      const fb = document.getElementById('import-feedback');
+      fb.textContent = `✓ ${imported.length} initiative${imported.length === 1 ? '' : 's'} imported`;
+      fb.style.display = 'inline';
+      setTimeout(() => { fb.style.display = 'none'; }, 3500);
+
+    } catch(err) {
+      alert('Could not read the file. Please make sure it is a valid .xlsx file exported from this tool.');
+    }
+    event.target.value = ''; // reset file input so same file can be re-imported
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+// ── Embedded data (mirrors data.json — edit via admin.html then paste updated values here) ──
+const EMBEDDED_DATA = {
+  "meta": {
+    "title": "Circle K eMobility · B2C Product",
+    "subtitle": "Portfolio Strategy · 2027",
+    "lastUpdated": "March 11 2026",
+    "confidential": true,
+    "outcomeStatement": "Become the market's easiest charging provider",
+    "outcomeMetric": "Target: Brand preference #1 in Nordics by end FY27"
+  },
+  "kpis": [],
+  "topRisks": [
+    { "id":"tr1", "severity":"high", "title":"1CP Resource Re-prioritisation — Viability Risk", "desc":"Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined." },
+    { "id":"tr2", "severity":"high", "title":"GMAP Convergence — Customer Migration & GTM Risk", "desc":"Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed. Phased market launch (Latvia/Lithuania Tap & Pay first) agreed as interim mitigation." }
+  ],
+  "focusPriorities": [
+    { "id":"fp1", "icon":"🚗", "title":"Drive New Customer Growth", "desc":"Increase visibility in maps and in-car navigation. Leverage converged Charge App / GMAP journey. Activate new strategic partnerships.", "color":"green" },
+    { "id":"fp2", "icon":"🇩🇰", "title":"Sharpen Denmark Traction", "desc":"Enable stronger strategy execution and market penetration in Denmark, where traction lags Norway and Sweden.", "color":"amber" },
+    { "id":"fp3", "icon":"📣", "title":"Strengthen Brand Equity", "desc":"New comms campaign aligned to 'Make Your Day' brand platform. New EV B2C marketing toolkit briefed Q4 FY26, live in SCA approx Q2/3 FY27.", "color":"blue" },
+    { "id":"fp4", "icon":"🔌", "title":"Invest and Launch Plug & Charge", "desc":"Committed FY27 priority. Certificate-based session start removes the last authentication friction point for registered users.", "color":"purple" }
+  ],
+  "domains": [
+    { "id":"roaming", "name":"Inbound roaming", "pm":"Kunsaya", "initials":"IR", "status":"amber", "statusLabel":"Directional", "confidence":"evidenced", "opp":3, "live":0, "eval":1, "stratImpact":7, "friction":6, "m1":{"label":"Opportunities","val":"1"}, "m2":{"label":"Solutions","val":"1 eval"}, "now":"Automate invoicing · Project:Credit policy & dunning", "next":"Integrate with hubs (Hubject, Gireve, Enapi)", "later":"Migrate from Spirii to EV One", "note":"", "desc":"Our inbound roaming are: 5% in SCA and 95% in M4. The inbound roaming capability are not there to serve the M4 markets." },
+    { "id":"convergence", "name":"GMAP Convergence & Commercial", "pm":"Valentina", "initials":"", "status":"blue", "statusLabel":"Development", "confidence":"evidenced", "opp":1, "live":0, "eval":1, "stratImpact":9, "friction":5, "m1":{"label":"Opportunities","val":"1"}, "m2":{"label":"Solutions","val":"1 eval"}, "now":"Finalize development to GTM · Marketing plan", "next":"GTM · Autocharge enrollment · RFID enablement", "later":"Prompts to drive traffic to store · Personalization", "note":"", "desc":"Converging the Circle K Charge app into the main Circle K app. Enables store visits per session metric and long-term customer lifetime value uplift." },
+    { "id":"dom-payments", "name":"Payments", "pm":"Neeti", "initials":"", "status":"amber", "statusLabel":"", "confidence":"evidenced", "opp":3, "live":0, "eval":0, "stratImpact":5, "friction":5, "m1":{"label":"Opportunities","val":"0"}, "m2":{"label":"Solutions","val":"0"}, "now":"Migrate OUPT from Driivz to EV One", "next":"Assess scope of OpenPOS · Finalize M4 OUPT strategy", "later":"Migrate OUPT from Spirii to EV One · Assess PLC cards", "note":"", "desc":"" }
+  ],
+  "solutions": [
+    { "id":1, "title":"Autocharge", "domain":"Charge", "status":"live", "markets":["NO","SE","DK","EE"], "desc":"Plug in, charging starts. No action required. Proven high satisfaction." },
+    { "id":2, "title":"CK Charge Mobile App", "domain":"Channel", "status":"live", "markets":["NO","SE","DK","EE","PL"], "desc":"B2C mobile application to find station, start/stop charging, onboard autocharge, see transactions etc. Proven high satisfaction." },
+    { "id":3, "title":"Tap & Pay — Logos", "domain":"Payments", "status":"live", "markets":["IE"], "desc":"Customer can unregistered pay for charging session with their card or x-wallet. No Extra integration." },
+    { "id":4, "title":"Tap & Pay — Adyen (S1U2)", "domain":"Payments", "status":"live", "markets":["NO","SE","DK","EE"], "desc":"Customer can unregistered pay for charging session with their card or x-wallet. Has Extra integration and automatic reconciliation." },
+    { "id":5, "title":"GMAP Convergence", "domain":"Convergence", "status":"dev", "markets":["NO","SE","DK","PL","EE","LV","LT","DE","BE","LU","NL"], "desc":"One integrated experience that delivers the market's easiest and most rewarding EV-charging experience." },
+    { "id":6, "title":"Car dealership giftcard acquisition pilot", "domain":"Partnerships", "status":"eval", "markets":[], "desc":"Micro-testing a giftcard initiative in partnership with car dealerships." },
+    { "id":7, "title":"Migrate M4 Payment terminal to EV One", "domain":"Payments", "status":"eval", "markets":[], "desc":"Evaluation of migrating M4 market payment terminals to the EV One platform." },
+    { "id":8, "title":"Inbound Roaming", "domain":"Attract", "status":"live", "markets":["NO","SE","DK"], "desc":"Active eMSP connections enabling customers from partner networks to charge at Circle K stations." },
+    { "id":9, "title":"Show 1M chargepoints and prices in GMAP", "domain":"1CP", "status":"dev", "markets":["NO","SE","DK","PL","EE","IE","LV","LT"], "desc":"Surfacing 1M+ chargepoints with live pricing across the roaming network directly inside the Circle K app." },
+    { "id":10, "title":"Show 1M chargepoints and prices in Webmap", "domain":"1CP", "status":"dev", "markets":["NO","SE","DK","PL","EE","IE","LV","LT"], "desc":"Surfacing 1M+ chargepoints with live pricing across the roaming network on the Circle K web map." }
+  ],
+  "risks": [
+    { "id":"r1", "opportunity":"Roaming experience opacity", "domain":"Roaming", "riskType":"value", "severity":"medium", "description":"Pricing opacity and authentication inconsistency for non-native users creates distrust and discourages repeat use.", "mitigation":"OCPI-based roaming improvements in evaluation. Transparent pricing pre-session is unexplored." },
+    { "id":"r2", "opportunity":"Plug & Charge (ISO 15118-20)", "domain":"Get to Station & Start", "riskType":"feasibility", "severity":"medium", "description":"Certificate-based authentication requires vehicle OEM adoption and charger firmware updates.", "mitigation":"Evaluation stage. Monitor OEM adoption curves. ISO 15118-2 (MAC-based) already live as interim." },
+    { "id":"r3", "opportunity":"In-car display integration", "domain":"Charging Session", "riskType":"feasibility", "severity":"low", "description":"Requires OCPP session data combined with vehicle API access. Both are externally dependent.", "mitigation":"Discovery only. Not a near-term priority. Monitor standardisation progress." },
+    { "id":"r4", "opportunity":"1CP resource re-prioritisation", "domain":"Programme-level", "riskType":"viability", "severity":"high", "description":"Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap.", "mitigation":"Escalate to eMM. Clarify which B2C GVSL items are at risk and reprioritise accordingly." },
+    { "id":"r5", "opportunity":"GMAP convergence — customer migration & GTM", "domain":"GMAP Convergence & Commercial", "riskType":"viability", "severity":"high", "description":"Converging away from the Circle K Charge App risks increased customer friction and potential customer loss.", "mitigation":"Define migration plan and rollback strategy. Validate GTM approach before full rollout." }
+  ]
+};
+
+// ── Data loader — uses embedded data, also attempts fetch from data.json if served via server ──
+async function loadFromJson() {
+  let d = EMBEDDED_DATA;
+  try {
+    const res = await fetch('data.json?v=' + Date.now());
+    if (res.ok) {
+      const fetched = await res.json();
+      if (fetched && typeof fetched === 'object') d = fetched;
+    }
+  } catch(e) {
+    // Running as local file — embedded data is the source of truth
+  }
+  try {
+
+    // Merge meta
+    if (d.meta) {
+      const m = d.meta;
+      const titleEl = document.querySelector('.hdr-title');
+      const subEl   = document.querySelector('.hdr-sub');
+      const metaEl  = document.querySelector('.hdr-meta');
+      const outTxt  = document.querySelector('.outcome-text');
+      const outMet  = document.querySelector('.outcome-metric');
+      if (titleEl && m.title)    titleEl.textContent = m.title;
+      if (subEl   && m.subtitle) subEl.textContent   = m.subtitle;
+      if (metaEl  && m.lastUpdated) metaEl.innerHTML = `Last updated: ${m.lastUpdated} &nbsp;·&nbsp; ${m.confidential ? 'Confidential' : ''}`;
+      if (outTxt  && m.outcomeStatement) outTxt.textContent = m.outcomeStatement;
+      if (outMet  && m.outcomeMetric)    outMet.textContent = m.outcomeMetric;
+    }
+
+    // Merge domains
+    if (Array.isArray(d.domains) && d.domains.length) {
+      d.domains.forEach((src, i) => {
+        if (DOMAINS[i]) Object.assign(DOMAINS[i], src);
+        else DOMAINS.push(src);
+      });
+      DOMAINS.length = d.domains.length;
+    }
+
+    // Merge solutions
+    if (Array.isArray(d.solutions) && d.solutions.length) {
+      ALL_SOLUTIONS.length = 0;
+      d.solutions.forEach(s => ALL_SOLUTIONS.push(s));
+    }
+
+    // Merge KPIs into DOM
+    if (Array.isArray(d.kpis)) {
+      d.kpis.forEach(k => {
+        const els = document.querySelectorAll('.kpi-lbl');
+        els.forEach(lbl => {
+          if (lbl.textContent.trim().toLowerCase() === k.label.toLowerCase()) {
+            const card = lbl.closest('.kpi');
+            if (!card) return;
+            const valEl = card.querySelector('.kpi-val');
+            const subEl = card.querySelector('.kpi-sub');
+            const tgtEl = card.querySelector('.kpi-target');
+            if (valEl && k.value) valEl.textContent = k.value;
+            if (subEl && k.sub)   subEl.textContent = k.sub;
+            if (tgtEl && k.target) tgtEl.textContent = k.target;
+          }
+        });
+      });
+    }
+
+    // Merge top risks into executive summary
+    if (Array.isArray(d.topRisks) && d.topRisks.length) {
+      renderTopRisks(d.topRisks);
+    } else {
+      renderTopRisks(DEFAULT_TOP_RISKS);
+    }
+
+    // Merge focus priorities
+    if (Array.isArray(d.focusPriorities) && d.focusPriorities.length) {
+      renderFocusPriorities(d.focusPriorities);
+    } else {
+      renderFocusPriorities(DEFAULT_FOCUS_PRIORITIES);
+    }
+
+    // Merge risk register table
+    if (Array.isArray(d.risks) && d.risks.length) {
+      const tbody = document.querySelector('#view-risk tbody');
+      if (tbody) {
+        tbody.innerHTML = d.risks.map(r => `
+          <tr>
+            <td><strong>${r.opportunity}</strong></td>
+            <td><small>${r.domain}</small></td>
+            <td><span class="risk-type ${r.riskType}">${r.riskType}</span></td>
+            <td><span class="risk-pill ${r.severity}">${r.severity.charAt(0).toUpperCase()+r.severity.slice(1)}</span></td>
+            <td><small>${r.description}</small></td>
+            <td><small>${r.mitigation}</small></td>
+          </tr>`).join('');
+      }
+    }
+
+  } catch(e) {
+    console.info('Data merge error:', e.message);
+    renderTopRisks(DEFAULT_TOP_RISKS);
+    renderFocusPriorities(DEFAULT_FOCUS_PRIORITIES);
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+(async () => {
+  await loadFromJson();
+  renderNNL(DOMAINS);
+  renderSolutions();
+  initCharts();
+})();
+</script>
+
+
+</body></html>

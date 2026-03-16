@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CK eMobility · Portfolio Admin</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#ffffff;--surface:#f8f9fb;--surface-2:#eef1f6;--border:#d1d9e6;
+  --text:#0f172a;--text-muted:#4b5e7a;
+  --accent:#b45309;--accent-bg:rgba(180,83,9,.08);
+  --green:#15803d;--red:#b91c1c;--blue:#0369a1;--amber:#b45309;--purple:#6d28d9;
+  --ck-red:#cc0000;
+  font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+  font-size:14px;
+}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&family=Syne:wght@700;800&display=swap');
+body{background:var(--bg);color:var(--text);min-height:100vh}
+
+/* Header */
+.hdr{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hdr-brand{display:flex;align-items:center;gap:12px}
+.logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:11px;color:#fff;background:var(--ck-red);flex-shrink:0;font-family:'Syne',sans-serif}
+.hdr-title{font-size:15px;font-weight:600;font-family:'Syne',sans-serif}
+.hdr-sub{font-size:12px;color:var(--text-muted)}
+
+/* Layout */
+.container{max-width:960px;margin:0 auto;padding:32px}
+
+/* Setup panel */
+.setup-panel{background:var(--accent-bg);border:1px solid rgba(180,83,9,.25);border-radius:12px;padding:24px;margin-bottom:32px}
+.setup-title{font-size:14px;font-weight:600;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:16px}
+.setup-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:12px}
+.setup-note{font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.6}
+.setup-note a{color:var(--blue);text-decoration:none}
+.setup-note a:hover{text-decoration:underline}
+
+/* Form elements */
+label{display:block;font-size:11px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);margin-bottom:5px}
+input,textarea,select{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-size:13px;font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);outline:none;transition:border-color .15s}
+input:focus,textarea:focus,select:focus{border-color:var(--accent)}
+textarea{resize:vertical;line-height:1.5}
+
+/* Section tabs */
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:28px}
+.tab{background:none;border:none;color:var(--text-muted);padding:10px 20px;cursor:pointer;font-size:13px;font-weight:500;border-bottom:2px solid transparent;transition:all .15s}
+.tab:hover{color:var(--text);background:var(--surface-2)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);background:var(--accent-bg)}
+
+/* Section panels */
+.section{display:none}
+.section.active{display:block}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-size:13px;font-weight:600;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted)}
+.card-badge{font-size:10px;padding:3px 8px;border-radius:10px;font-weight:600;font-family:'DM Mono',monospace;text-transform:uppercase}
+.badge-green{background:rgba(21,128,61,.12);color:var(--green)}
+.badge-amber{background:rgba(180,83,9,.12);color:var(--amber)}
+.badge-red{background:rgba(185,28,28,.12);color:var(--red)}
+.badge-blue{background:rgba(3,105,161,.12);color:var(--blue)}
+.badge-purple{background:rgba(109,40,217,.12);color:var(--purple)}
+
+/* Field groups */
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px}
+.field-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:12px}
+.field{margin-bottom:12px}
+
+/* Buttons */
+.btn{padding:8px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;font-family:'DM Sans',sans-serif}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#92400e}
+.btn-secondary{background:var(--surface-2);border:1px solid var(--border);color:var(--text)}
+.btn-secondary:hover{background:var(--border)}
+.btn-danger{background:rgba(185,28,28,.1);border:1px solid rgba(185,28,28,.3);color:var(--red)}
+.btn-danger:hover{background:rgba(185,28,28,.2)}
+.btn-sm{padding:4px 10px;font-size:11px}
+
+/* List items */
+.list-item{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:14px;background:var(--surface-2);border-radius:8px;margin-bottom:8px;border:1px solid var(--border)}
+.list-item-content{flex:1;min-width:0}
+.list-item-title{font-size:13px;font-weight:600;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.list-item-meta{font-size:12px;color:var(--text-muted)}
+.list-item-actions{display:flex;gap:6px;flex-shrink:0}
+
+/* Status indicator */
+.save-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;z-index:200}
+.save-status{font-size:13px;color:var(--text-muted);font-family:'DM Mono',monospace}
+.save-status.unsaved{color:var(--amber)}
+.save-status.saving{color:var(--blue)}
+.save-status.saved{color:var(--green)}
+.save-status.error{color:var(--red)}
+
+/* Add form */
+.add-form{background:rgba(180,83,9,.04);border:1px dashed rgba(180,83,9,.3);border-radius:8px;padding:16px;margin-top:12px;display:none}
+.add-form.open{display:block}
+
+/* Token input */
+.token-wrap{position:relative}
+.token-wrap input{padding-right:70px}
+.token-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--text-muted);font-size:11px;cursor:pointer;font-family:'DM Mono',monospace}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* Inline status pill */
+.status-pill{display:inline-block;padding:2px 7px;border-radius:4px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-family:'DM Mono',monospace}
+.sp-live{background:rgba(52,211,153,.15);color:var(--green)}
+.sp-dev{background:rgba(3,105,161,.15);color:var(--blue)}
+.sp-eval{background:rgba(167,139,250,.15);color:var(--purple)}
+.sp-disc{background:rgba(100,116,139,.12);color:var(--text-muted)}
+.sp-high{background:rgba(185,28,28,.12);color:var(--red)}
+.sp-medium{background:rgba(180,83,9,.12);color:var(--amber)}
+.sp-low{background:rgba(21,128,61,.12);color:var(--green)}
+
+/* Responsive */
+@media(max-width:700px){
+  .field-row,.field-row-3,.setup-row{grid-template-columns:1fr}
+  .container{padding:16px}
+  .hdr{padding:12px 16px}
+}
+
+/* Padding for fixed save bar */
+body{padding-bottom:70px}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ PASSWORD GATE ════════════════════════ -->
+<div id="gate" style="
+  position:fixed;inset:0;background:#ffffff;z-index:9999;
+  display:flex;align-items:center;justify-content:center;
+">
+  <div style="
+    background:#f8f9fb;border:1px solid #d1d9e6;border-radius:12px;
+    padding:40px;width:360px;text-align:center;
+  ">
+    <div style="
+      width:40px;height:40px;border-radius:8px;background:#cc0000;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;font-size:12px;color:#fff;margin:0 auto 16px;
+      font-family:'Syne',sans-serif;
+    ">CK</div>
+    <div style="font-size:16px;font-weight:700;margin-bottom:4px;font-family:'Syne',sans-serif">Portfolio Admin</div>
+    <div style="font-size:13px;color:#4b5e7a;margin-bottom:24px">Circle K eMobility · Confidential</div>
+    <input id="gate-input" type="password" placeholder="Enter password"
+      style="
+        width:100%;padding:10px 14px;border:1px solid #d1d9e6;border-radius:8px;
+        font-size:14px;font-family:'DM Sans',sans-serif;outline:none;
+        text-align:center;margin-bottom:12px;
+      "
+      onkeydown="if(event.key==='Enter')checkGate()"
+    >
+    <div id="gate-error" style="font-size:12px;color:#b91c1c;margin-bottom:10px;display:none">Incorrect password. Try again.</div>
+    <button onclick="checkGate()" style="
+      width:100%;padding:10px;background:#b45309;color:#fff;border:none;
+      border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;
+      font-family:'DM Sans',sans-serif;
+    ">Access Admin</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  const PASSWORD = 'ckemobility2026';
+  const SESSION_KEY = 'ck_auth';
+  if(sessionStorage.getItem(SESSION_KEY) === '1'){
+    document.getElementById('gate').style.display = 'none';
+  }
+  window.checkGate = function(){
+    const val = document.getElementById('gate-input').value;
+    if(val === PASSWORD){
+      sessionStorage.setItem(SESSION_KEY,'1');
+      document.getElementById('gate').style.display = 'none';
+    } else {
+      document.getElementById('gate-error').style.display = 'block';
+      document.getElementById('gate-input').value = '';
+      document.getElementById('gate-input').focus();
+    }
+  };
+})();
+</script>
+
+<header class="hdr">
+  <div class="hdr-brand">
+    <div class="logo">CK</div>
+    <div>
+      <div class="hdr-title">Portfolio Admin</div>
+      <div class="hdr-sub">Circle K eMobility · Content Editor</div>
+    </div>
+  </div>
+  <a href="index.html" style="font-size:13px;color:var(--blue);text-decoration:none">← View dashboard</a>
+</header>
+
+<div class="container">
+
+  <!-- GitHub Setup -->
+  <div class="setup-panel" id="setup-panel">
+    <div class="setup-title">🔧 GitHub Connection</div>
+    <div class="setup-row">
+      <div>
+        <label>GitHub Owner (username or org)</label>
+        <input type="text" id="gh-owner" placeholder="e.g. circlek-emobility">
+      </div>
+      <div>
+        <label>Repository Name</label>
+        <input type="text" id="gh-repo" placeholder="e.g. portfolio-strategy">
+      </div>
+    </div>
+    <div class="setup-row">
+      <div>
+        <label>Branch</label>
+        <input type="text" id="gh-branch" value="main">
+      </div>
+      <div>
+        <label>Personal Access Token</label>
+        <div class="token-wrap">
+          <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx">
+          <button class="token-toggle" onclick="toggleToken()">show</button>
+        </div>
+      </div>
+    </div>
+    <div class="setup-row" style="align-items:end">
+      <div>
+        <label>data.json Path in Repo</label>
+        <input type="text" id="gh-path" value="public/data.json">
+      </div>
+      <div>
+        <button class="btn btn-primary" onclick="connectAndLoad()">Connect & Load Data</button>
+      </div>
+    </div>
+    <div class="setup-note">
+      Token needs <strong>repo</strong> scope only. 
+      <a href="https://github.com/settings/tokens/new?scopes=repo&description=CK+Portfolio+Admin" target="_blank">Generate one here ↗</a> — 
+      Settings are saved in your browser (localStorage) and never leave your device.
+    </div>
+    <div id="connect-status" style="margin-top:10px;font-size:13px;font-family:'DM Mono',monospace;display:none"></div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab(this,'meta')">📋 Meta & KPIs</button>
+    <button class="tab" onclick="switchTab(this,'domains')">🗺 Domains</button>
+    <button class="tab" onclick="switchTab(this,'solutions')">⚙️ Solutions</button>
+    <button class="tab" onclick="switchTab(this,'risks')">🔍 Risks</button>
+    <button class="tab" onclick="switchTab(this,'executive')">📊 Executive</button>
+  </div>
+
+  <!-- ── META & KPIs ─────────────────────────────────────────────── -->
+  <div class="section active" id="sec-meta">
+    <div class="card">
+      <div class="card-header"><div class="card-title">Page Meta</div></div>
+      <div class="field-row">
+        <div class="field">
+          <label>Page Title</label>
+          <input type="text" id="meta-title">
+        </div>
+        <div class="field">
+          <label>Subtitle</label>
+          <input type="text" id="meta-subtitle">
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Last Updated</label>
+          <input type="text" id="meta-lastUpdated" placeholder="e.g. Mar 2026">
+        </div>
+        <div class="field">
+          <label>Outcome Statement</label>
+          <input type="text" id="meta-outcomeStatement">
+        </div>
+      </div>
+      <div class="field">
+        <label>Outcome Metric</label>
+        <input type="text" id="meta-outcomeMetric">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">KPI Cards</div>
+        <button class="btn btn-secondary btn-sm" onclick="addKpi()">+ Add KPI</button>
+      </div>
+      <div id="kpi-list"></div>
+    </div>
+  </div>
+
+  <!-- ── DOMAINS ────────────────────────────────────────────────── -->
+  <div class="section" id="sec-domains">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Journey Domains</div>
+        <button class="btn btn-secondary btn-sm" onclick="addDomain()">+ Add Domain</button>
+      </div>
+      <div id="domain-list"></div>
+    </div>
+  </div>
+
+  <!-- ── SOLUTIONS ──────────────────────────────────────────────── -->
+  <div class="section" id="sec-solutions">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Solutions Pipeline</div>
+        <button class="btn btn-secondary btn-sm" onclick="addSolution()">+ Add Solution</button>
+      </div>
+      <div id="sol-list"></div>
+    </div>
+  </div>
+
+  <!-- ── RISKS ──────────────────────────────────────────────────── -->
+  <div class="section" id="sec-risks">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Risk Register</div>
+        <button class="btn btn-secondary btn-sm" onclick="addRisk()">+ Add Risk</button>
+      </div>
+      <div id="risk-list"></div>
+    </div>
+  </div>
+
+  <!-- ── EXECUTIVE ──────────────────────────────────────────────── -->
+  <div class="section" id="sec-executive">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Top Risks (Executive Summary)</div>
+        <button class="btn btn-secondary btn-sm" onclick="addTopRisk()">+ Add</button>
+      </div>
+      <div id="top-risk-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Strategic Opportunities</div>
+        <button class="btn btn-secondary btn-sm" onclick="addStrategicOpp()">+ Add</button>
+      </div>
+      <div id="strat-opp-list"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">FY27 Focus Priorities</div>
+        <button class="btn btn-secondary btn-sm" onclick="addFocusPriority()">+ Add</button>
+      </div>
+      <div id="focus-list"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Save bar -->
+<div class="save-bar">
+  <div class="save-status" id="save-status">Not connected — configure GitHub above</div>
+  <div style="display:flex;gap:10px">
+    <button class="btn btn-secondary" onclick="loadData()" id="btn-reload" disabled>↺ Reload</button>
+    <button class="btn btn-primary" onclick="saveData()" id="btn-save" disabled>💾 Save to GitHub</button>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────
+let DATA = null;
+let fileSha = null;
+let isDirty = false;
+
+// ── GitHub config (persisted in localStorage) ─────────────────────────
+function getConfig() {
+  return {
+    owner:  document.getElementById('gh-owner').value.trim(),
+    repo:   document.getElementById('gh-repo').value.trim(),
+    branch: document.getElementById('gh-branch').value.trim() || 'main',
+    token:  document.getElementById('gh-token').value.trim(),
+    path:   document.getElementById('gh-path').value.trim() || 'public/data.json',
+  };
+}
+
+function saveConfig() {
+  const c = getConfig();
+  localStorage.setItem('ck-admin-config', JSON.stringify({ owner:c.owner, repo:c.repo, branch:c.branch, path:c.path }));
+  // token intentionally not persisted in localStorage for security
+}
+
+function restoreConfig() {
+  const raw = localStorage.getItem('ck-admin-config');
+  if (!raw) return;
+  try {
+    const c = JSON.parse(raw);
+    if (c.owner)  document.getElementById('gh-owner').value  = c.owner;
+    if (c.repo)   document.getElementById('gh-repo').value   = c.repo;
+    if (c.branch) document.getElementById('gh-branch').value = c.branch;
+    if (c.path)   document.getElementById('gh-path').value   = c.path;
+  } catch(e) {}
+}
+
+function toggleToken() {
+  const inp = document.getElementById('gh-token');
+  const btn = inp.nextElementSibling;
+  const hidden = inp.type === 'password';
+  inp.type = hidden ? 'text' : 'password';
+  btn.textContent = hidden ? 'hide' : 'show';
+}
+
+// ── Connect + Load ─────────────────────────────────────────────────────
+async function connectAndLoad() {
+  saveConfig();
+  const status = document.getElementById('connect-status');
+  status.style.display = 'block';
+  status.style.color = 'var(--blue)';
+  status.textContent = 'Connecting…';
+  await loadData();
+}
+
+async function loadData() {
+  const c = getConfig();
+  if (!c.owner || !c.repo || !c.token) {
+    setConnectStatus('error', 'Please fill in Owner, Repo, and Token');
+    return;
+  }
+  setSaveStatus('saving', 'Loading from GitHub…');
+  try {
+    const url = `https://api.github.com/repos/${c.owner}/${c.repo}/contents/${c.path}?ref=${c.branch}`;
+    const res = await fetch(url, {
+      headers: { Authorization: `token ${c.token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
+    const json = await res.json();
+    fileSha = json.sha;
+    DATA = JSON.parse(atob(json.content.replace(/\n/g,'')));
+    populateForm();
+    document.getElementById('btn-save').disabled = false;
+    document.getElementById('btn-reload').disabled = false;
+    setSaveStatus('saved', 'Loaded · All changes saved');
+    setConnectStatus('ok', `✓ Connected to ${c.owner}/${c.repo} (${c.branch})`);
+    isDirty = false;
+  } catch(e) {
+    setSaveStatus('error', 'Load failed: ' + e.message);
+    setConnectStatus('error', '✗ ' + e.message);
+  }
+}
+
+function setConnectStatus(type, msg) {
+  const el = document.getElementById('connect-status');
+  el.style.display = 'block';
+  el.style.color = type === 'ok' ? 'var(--green)' : type === 'error' ? 'var(--red)' : 'var(--blue)';
+  el.textContent = msg;
+}
+
+// ── Save ───────────────────────────────────────────────────────────────
+async function saveData() {
+  const c = getConfig();
+  if (!c.token || !fileSha) { setSaveStatus('error','Not connected'); return; }
+  collectForm();
+  setSaveStatus('saving', 'Saving to GitHub…');
+  try {
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(DATA, null, 2))));
+    const now = new Date().toISOString().slice(0,16).replace('T',' ');
+    const res = await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/contents/${c.path}`, {
+      method: 'PUT',
+      headers: { Authorization:`token ${c.token}`, Accept:'application/vnd.github.v3+json', 'Content-Type':'application/json' },
+      body: JSON.stringify({ message:`Portfolio update — ${now}`, content, sha: fileSha, branch: c.branch })
+    });
+    if (!res.ok) throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
+    const json = await res.json();
+    fileSha = json.content.sha;
+    setSaveStatus('saved', `Saved · ${now}`);
+    isDirty = false;
+  } catch(e) {
+    setSaveStatus('error', 'Save failed: ' + e.message);
+  }
+}
+
+function setSaveStatus(type, msg) {
+  const el = document.getElementById('save-status');
+  el.className = 'save-status ' + (type === 'saved' ? 'saved' : type === 'saving' ? 'saving' : type === 'error' ? 'error' : 'unsaved');
+  el.textContent = msg;
+}
+
+function markDirty() {
+  if (!isDirty) { isDirty = true; setSaveStatus('unsaved', 'Unsaved changes'); }
+}
+
+// ── Form population ────────────────────────────────────────────────────
+function populateForm() {
+  if (!DATA) return;
+  // Meta
+  setVal('meta-title', DATA.meta?.title);
+  setVal('meta-subtitle', DATA.meta?.subtitle);
+  setVal('meta-lastUpdated', DATA.meta?.lastUpdated);
+  setVal('meta-outcomeStatement', DATA.meta?.outcomeStatement);
+  setVal('meta-outcomeMetric', DATA.meta?.outcomeMetric);
+  // KPIs
+  renderKpiList();
+  // Domains
+  renderDomainList();
+  // Solutions
+  renderSolutionList();
+  // Risks
+  renderRiskList();
+  // Executive
+  renderTopRiskList();
+  renderStratOppList();
+  renderFocusList();
+  // Change listeners
+  document.querySelectorAll('input,textarea,select').forEach(el => {
+    el.addEventListener('input', markDirty);
+    el.addEventListener('change', markDirty);
+  });
+}
+
+function setVal(id, val) {
+  const el = document.getElementById(id);
+  if (el && val !== undefined) el.value = val;
+}
+
+// ── Collect form back to DATA ──────────────────────────────────────────
+function collectForm() {
+  DATA.meta = {
+    ...DATA.meta,
+    title: document.getElementById('meta-title').value,
+    subtitle: document.getElementById('meta-subtitle').value,
+    lastUpdated: document.getElementById('meta-lastUpdated').value,
+    outcomeStatement: document.getElementById('meta-outcomeStatement').value,
+    outcomeMetric: document.getElementById('meta-outcomeMetric').value,
+  };
+  // KPIs, Domains, Solutions, Risks collected inline via object references
+}
+
+// ── KPIs ───────────────────────────────────────────────────────────────
+function renderKpiList() {
+  const list = document.getElementById('kpi-list');
+  list.innerHTML = (DATA.kpis || []).map((k,i) => `
+    <div class="list-item" id="kpi-item-${i}">
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div>
+          <label>Label</label>
+          <input type="text" value="${esc(k.label)}" onchange="DATA.kpis[${i}].label=this.value;markDirty()">
+        </div>
+        <div>
+          <label>Value</label>
+          <input type="text" value="${esc(k.value)}" onchange="DATA.kpis[${i}].value=this.value;markDirty()">
+        </div>
+        <div>
+          <label>Sub-label</label>
+          <input type="text" value="${esc(k.sub)}" onchange="DATA.kpis[${i}].sub=this.value;markDirty()">
+        </div>
+        <div>
+          <label>Target</label>
+          <input type="text" value="${esc(k.target)}" onchange="DATA.kpis[${i}].target=this.value;markDirty()">
+        </div>
+        <div>
+          <label>Colour</label>
+          <select onchange="DATA.kpis[${i}].color=this.value;markDirty()">
+            ${['green','amber','blue','red','purple'].map(c=>`<option value="${c}"${k.color===c?' selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-danger btn-sm" style="margin-top:20px" onclick="removeItem('kpis',${i})">✕</button>
+    </div>`).join('');
+}
+
+function addKpi() {
+  DATA.kpis.push({ id:'kpi-'+Date.now(), label:'New KPI', value:'—', sub:'', target:'Target: TBC', color:'green' });
+  renderKpiList(); markDirty();
+}
+
+// ── Domains ────────────────────────────────────────────────────────────
+function renderDomainList() {
+  const list = document.getElementById('domain-list');
+  list.innerHTML = (DATA.domains || []).map((d,i) => `
+    <div class="card" style="margin-bottom:12px;border-left:4px solid var(--${d.status==='red'?'red':d.status==='amber'?'amber':d.status==='blue'?'blue':'green'})">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <strong style="font-size:14px">${esc(d.name)}</strong>
+        <button class="btn btn-danger btn-sm" onclick="removeItem('domains',${i})">✕ Remove</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div><label>Name</label><input type="text" value="${esc(d.name)}" onchange="DATA.domains[${i}].name=this.value;renderDomainList();markDirty()"></div>
+        <div><label>PM Owner</label><input type="text" value="${esc(d.pm)}" onchange="DATA.domains[${i}].pm=this.value;markDirty()"></div>
+        <div><label>Initials</label><input type="text" value="${esc(d.initials)}" onchange="DATA.domains[${i}].initials=this.value;markDirty()"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div><label>Status</label>
+          <select onchange="DATA.domains[${i}].status=this.value;markDirty()">
+            ${['red','amber','green','blue'].map(s=>`<option value="${s}"${d.status===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div><label>Status Label</label><input type="text" value="${esc(d.statusLabel)}" onchange="DATA.domains[${i}].statusLabel=this.value;markDirty()"></div>
+        <div><label>Confidence</label>
+          <select onchange="DATA.domains[${i}].confidence=this.value;markDirty()">
+            ${['evidenced','directional','hypothesis'].map(s=>`<option value="${s}"${d.confidence===s?' selected':''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div><label>Opportunities #</label><input type="number" value="${d.opp}" onchange="DATA.domains[${i}].opp=+this.value;markDirty()"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:12px">
+        <div><label>Now</label><input type="text" value="${esc(d.now)}" onchange="DATA.domains[${i}].now=this.value;markDirty()"></div>
+        <div><label>Next</label><input type="text" value="${esc(d.next)}" onchange="DATA.domains[${i}].next=this.value;markDirty()"></div>
+        <div><label>Later</label><input type="text" value="${esc(d.later)}" onchange="DATA.domains[${i}].later=this.value;markDirty()"></div>
+      </div>
+      <div style="margin-bottom:10px"><label>Note (status note)</label><input type="text" value="${esc(d.note)}" onchange="DATA.domains[${i}].note=this.value;markDirty()"></div>
+      <div><label>Description</label><textarea rows="2" onchange="DATA.domains[${i}].desc=this.value;markDirty()">${esc(d.desc)}</textarea></div>
+    </div>`).join('');
+}
+
+function addDomain() {
+  DATA.domains.push({ id:'dom-'+Date.now(), name:'New Domain', pm:'PM Name', initials:'XX', status:'amber', statusLabel:'In Progress', confidence:'hypothesis', opp:0, live:0, eval:0, stratImpact:5, friction:5, m1:{label:'Opportunities',val:'0'}, m2:{label:'Solutions',val:'0'}, now:'', next:'', later:'', note:'', desc:'' });
+  renderDomainList(); markDirty();
+}
+
+// ── Solutions ──────────────────────────────────────────────────────────
+const ALL_MARKETS = ['NO','SE','DK','PL','EE','IE','LV','LT','DE','BE','LU','NL'];
+const MKT_FLAGS = {NO:'🇳🇴',SE:'🇸🇪',DK:'🇩🇰',PL:'🇵🇱',EE:'🇪🇪',IE:'🇮🇪',LV:'🇱🇻',LT:'🇱🇹',DE:'🇩🇪',BE:'🇧🇪',LU:'🇱🇺',NL:'🇳🇱'};
+
+function renderSolutionList() {
+  const list = document.getElementById('sol-list');
+  list.innerHTML = (DATA.solutions || []).map((s,i) => {
+    const statusClass = {live:'sp-live',dev:'sp-dev',eval:'sp-eval',disc:'sp-disc'}[s.status]||'sp-disc';
+    const mktChecks = ALL_MARKETS.map(m => `
+      <label style="display:inline-flex;align-items:center;gap:4px;margin:2px 4px 2px 0;font-size:12px;cursor:pointer;font-family:'DM Mono',monospace">
+        <input type="checkbox" ${(s.markets||[]).includes(m)?'checked':''} onchange="toggleMarket(${i},'${m}',this.checked)"> ${MKT_FLAGS[m]} ${m}
+      </label>`).join('');
+    return `
+    <div class="list-item" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <span class="status-pill ${statusClass}">${s.status}</span>
+        <button class="btn btn-danger btn-sm" onclick="removeItem('solutions',${i})">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+        <div><label>Title</label><input type="text" value="${esc(s.title)}" onchange="DATA.solutions[${i}].title=this.value;markDirty()"></div>
+        <div><label>Domain</label><input type="text" value="${esc(s.domain||'')}" onchange="DATA.solutions[${i}].domain=this.value;markDirty()"></div>
+      </div>
+      <div style="margin-bottom:10px">
+        <label>Status</label>
+        <select onchange="DATA.solutions[${i}].status=this.value;renderSolutionList();markDirty()">
+          ${['live','dev','eval','disc'].map(v=>`<option value="${v}"${s.status===v?' selected':''}>${v}</option>`).join('')}
+        </select>
+      </div>
+      <div style="margin-bottom:10px"><label>Description</label><textarea rows="2" onchange="DATA.solutions[${i}].desc=this.value;markDirty()">${esc(s.desc||'')}</textarea></div>
+      <div><label>Markets</label><div style="margin-top:6px">${mktChecks}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function toggleMarket(idx, code, checked) {
+  const markets = DATA.solutions[idx].markets || [];
+  if (checked && !markets.includes(code)) markets.push(code);
+  if (!checked) { const i = markets.indexOf(code); if (i>-1) markets.splice(i,1); }
+  DATA.solutions[idx].markets = markets;
+  markDirty();
+}
+
+function addSolution() {
+  DATA.solutions.push({ id:Date.now(), title:'New Solution', domain:'', status:'eval', markets:[], desc:'' });
+  renderSolutionList(); markDirty();
+}
+
+// ── Risks ──────────────────────────────────────────────────────────────
+function renderRiskList() {
+  const list = document.getElementById('risk-list');
+  list.innerHTML = (DATA.risks || []).map((r,i) => `
+    <div class="list-item" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <strong style="font-size:13px">${esc(r.opportunity)}</strong>
+        <button class="btn btn-danger btn-sm" onclick="removeItem('risks',${i})">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:10px">
+        <div><label>Opportunity</label><input type="text" value="${esc(r.opportunity)}" onchange="DATA.risks[${i}].opportunity=this.value;renderRiskList();markDirty()"></div>
+        <div><label>Domain</label><input type="text" value="${esc(r.domain||'')}" onchange="DATA.risks[${i}].domain=this.value;markDirty()"></div>
+        <div><label>Risk Type</label>
+          <select onchange="DATA.risks[${i}].riskType=this.value;markDirty()">
+            ${['value','usability','feasibility','viability'].map(v=>`<option value="${v}"${r.riskType===v?' selected':''}>${v}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:10px">
+        <label>Severity</label>
+        <select onchange="DATA.risks[${i}].severity=this.value;markDirty()">
+          ${['high','medium','low'].map(v=>`<option value="${v}"${r.severity===v?' selected':''}>${v}</option>`).join('')}
+        </select>
+      </div>
+      <div style="margin-bottom:10px"><label>Description</label><textarea rows="2" onchange="DATA.risks[${i}].description=this.value;markDirty()">${esc(r.description||'')}</textarea></div>
+      <div><label>Mitigation</label><textarea rows="2" onchange="DATA.risks[${i}].mitigation=this.value;markDirty()">${esc(r.mitigation||'')}</textarea></div>
+    </div>`).join('');
+}
+
+function addRisk() {
+  DATA.risks.push({ id:'r'+Date.now(), opportunity:'New Risk', domain:'', riskType:'value', severity:'medium', description:'', mitigation:'' });
+  renderRiskList(); markDirty();
+}
+
+// ── Top Risks ──────────────────────────────────────────────────────────
+function renderTopRiskList() {
+  const list = document.getElementById('top-risk-list');
+  list.innerHTML = (DATA.topRisks || []).map((r,i) => `
+    <div class="list-item" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <span class="status-pill sp-${r.severity}">${r.severity}</span>
+        <button class="btn btn-danger btn-sm" onclick="removeItem('topRisks',${i})">✕</button>
+      </div>
+      <div style="margin-bottom:10px">
+        <label>Severity</label>
+        <select onchange="DATA.topRisks[${i}].severity=this.value;renderTopRiskList();markDirty()">
+          ${['high','medium','low'].map(v=>`<option value="${v}"${r.severity===v?' selected':''}>${v}</option>`).join('')}
+        </select>
+      </div>
+      <div style="margin-bottom:10px"><label>Title</label><input type="text" value="${esc(r.title)}" onchange="DATA.topRisks[${i}].title=this.value;markDirty()"></div>
+      <div><label>Description</label><textarea rows="2" onchange="DATA.topRisks[${i}].desc=this.value;markDirty()">${esc(r.desc||'')}</textarea></div>
+    </div>`).join('');
+}
+
+function addTopRisk() {
+  DATA.topRisks.push({ id:'tr'+Date.now(), severity:'medium', title:'New Risk', desc:'' });
+  renderTopRiskList(); markDirty();
+}
+
+// ── Strategic Opps ─────────────────────────────────────────────────────
+function renderStratOppList() {
+  const list = document.getElementById('strat-opp-list');
+  list.innerHTML = (DATA.strategicOpportunities || []).map((o,i) => `
+    <div class="list-item" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <strong>${esc(o.title)}</strong>
+        <button class="btn btn-danger btn-sm" onclick="removeItem('strategicOpportunities',${i})">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+        <div><label>Icon (emoji)</label><input type="text" value="${esc(o.icon||'')}" onchange="DATA.strategicOpportunities[${i}].icon=this.value;markDirty()"></div>
+        <div><label>Colour</label>
+          <select onchange="DATA.strategicOpportunities[${i}].color=this.value;markDirty()">
+            ${['green','amber','blue','purple','red'].map(c=>`<option value="${c}"${o.color===c?' selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:10px"><label>Title</label><input type="text" value="${esc(o.title)}" onchange="DATA.strategicOpportunities[${i}].title=this.value;renderStratOppList();markDirty()"></div>
+      <div><label>Description</label><textarea rows="2" onchange="DATA.strategicOpportunities[${i}].desc=this.value;markDirty()">${esc(o.desc||'')}</textarea></div>
+    </div>`).join('');
+}
+
+function addStrategicOpp() {
+  DATA.strategicOpportunities.push({ id:'so'+Date.now(), icon:'💡', title:'New Opportunity', desc:'', color:'green' });
+  renderStratOppList(); markDirty();
+}
+
+// ── Focus Priorities ───────────────────────────────────────────────────
+function renderFocusList() {
+  const list = document.getElementById('focus-list');
+  list.innerHTML = (DATA.focusPriorities || []).map((p,i) => `
+    <div class="list-item" style="flex-direction:column;align-items:stretch">
+      <div style="display:flex;justify-content:space-between;margin-bottom:10px">
+        <strong>${esc(p.title)}</strong>
+        <button class="btn btn-danger btn-sm" onclick="removeItem('focusPriorities',${i})">✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+        <div><label>Icon</label><input type="text" value="${esc(p.icon||'')}" onchange="DATA.focusPriorities[${i}].icon=this.value;markDirty()"></div>
+        <div><label>Colour</label>
+          <select onchange="DATA.focusPriorities[${i}].color=this.value;markDirty()">
+            ${['green','amber','blue','purple','red'].map(c=>`<option value="${c}"${p.color===c?' selected':''}>${c}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div style="margin-bottom:10px"><label>Title</label><input type="text" value="${esc(p.title)}" onchange="DATA.focusPriorities[${i}].title=this.value;renderFocusList();markDirty()"></div>
+      <div><label>Description</label><textarea rows="2" onchange="DATA.focusPriorities[${i}].desc=this.value;markDirty()">${esc(p.desc||'')}</textarea></div>
+    </div>`).join('');
+}
+
+function addFocusPriority() {
+  DATA.focusPriorities.push({ id:'fp'+Date.now(), icon:'🎯', title:'New Priority', desc:'', color:'amber' });
+  renderFocusList(); markDirty();
+}
+
+// ── Generic remove ─────────────────────────────────────────────────────
+function removeItem(key, idx) {
+  if (!confirm('Remove this item?')) return;
+  DATA[key].splice(idx, 1);
+  const renders = { kpis: renderKpiList, domains: renderDomainList, solutions: renderSolutionList, risks: renderRiskList, topRisks: renderTopRiskList, strategicOpportunities: renderStratOppList, focusPriorities: renderFocusList };
+  if (renders[key]) renders[key]();
+  markDirty();
+}
+
+// ── Tabs ───────────────────────────────────────────────────────────────
+function switchTab(btn, name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('sec-' + name).classList.add('active');
+}
+
+// ── Util ───────────────────────────────────────────────────────────────
+function esc(str) {
+  if (!str && str !== 0) return '';
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Warn before leaving unsaved ────────────────────────────────────────
+window.addEventListener('beforeunload', e => {
+  if (isDirty) { e.preventDefault(); e.returnValue = ''; }
+});
+
+// ── Init ───────────────────────────────────────────────────────────────
+restoreConfig();
+</script>
+</body>
+</html>
