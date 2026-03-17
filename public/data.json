@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Circle K eMobility ÃÂ· B2C Product",
-    "subtitle": "Portfolio Strategy ÃÂ· 2027",
+    "title": "Circle K eMobility ÃÂÃÂ· B2C Product",
+    "subtitle": "Portfolio Strategy ÃÂÃÂ· 2027",
     "lastUpdated": "March 11 2026",
     "confidential": true,
     "outcomeStatement": "Become the market's easiest charging provider",
@@ -12,35 +12,35 @@
     {
       "id": "tr1",
       "severity": "high",
-      "title": "1CP Resource Re-prioritisation ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Viability Risk",
+      "title": "1CP Resource Re-prioritisation ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Viability Risk",
       "desc": "Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined."
     },
     {
       "id": "tr2",
       "severity": "high",
-      "title": "GMAP Convergence ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Customer Migration & GTM Risk",
+      "title": "GMAP Convergence ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Customer Migration & GTM Risk",
       "desc": "Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed. Phased market launch (Latvia/Lithuania Tap & Pay first) agreed as interim mitigation."
     }
   ],
   "strategicOpportunities": [
     {
       "id": "so1",
-      "icon": "ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ¡",
+      "icon": "ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¡",
       "title": "Autocharge as Differentiation Anchor",
-      "desc": "Autocharge is already live and establishes a credibility baseline no competitor has matched at scale. The strategic opportunity is to extend this 'easiest' perception across all five friction points ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ arrival, start, session, error, roaming.",
+      "desc": "Autocharge is already live and establishes a credibility baseline no competitor has matched at scale. The strategic opportunity is to extend this 'easiest' perception across all five friction points ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ arrival, start, session, error, roaming.",
       "color": "green"
     },
     {
       "id": "so2",
-      "icon": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂª",
+      "icon": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂª",
       "title": "Charging Session as Store Traffic Driver",
       "desc": "Dwell time during a charging session is an underutilised commercial asset. GMAP convergence and in-session engagement create a direct link between charging experience quality and store visits per session.",
       "color": "blue"
     },
     {
       "id": "so3",
-      "icon": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ",
-      "title": "Plug & Charge (ISO 15118-20) ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Future Moat",
+      "icon": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
+      "title": "Plug & Charge (ISO 15118-20) ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Future Moat",
       "desc": "Certificate-based mutual authentication removes the last remaining friction point for registered users. Vehicle-side dependency is the blocker; getting ahead of the adoption curve creates a durable competitive advantage.",
       "color": "purple"
     }
@@ -48,28 +48,28 @@
   "focusPriorities": [
     {
       "id": "fp1",
-      "icon": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ",
+      "icon": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
       "title": "Drive New Customer Growth",
       "desc": "Increase visibility in maps and in-car navigation. Leverage converged Charge App / GMAP journey. Activate new strategic partnerships.",
       "color": "green"
     },
     {
       "id": "fp2",
-      "icon": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ©ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ°",
+      "icon": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ©ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ°",
       "title": "Sharpen Denmark Traction",
       "desc": "Enable stronger strategy execution and market penetration in Denmark, where traction lags Norway and Sweden.",
       "color": "amber"
     },
     {
       "id": "fp3",
-      "icon": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ£",
+      "icon": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ£",
       "title": "Strengthen Brand Equity",
       "desc": "New comms campaign aligned to 'Make Your Day' brand platform. New EV B2C marketing toolkit briefed Q4 FY26, live in SCA approx Q2/3 FY27.",
       "color": "blue"
     },
     {
       "id": "fp4",
-      "icon": "ÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂ",
+      "icon": "ÃÂÃÂÃÂÃÂ°ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
       "title": "Invest and Launch Plug & Charge",
       "desc": "Committed FY27 priority. Certificate-based session start removes the last authentication friction point for registered users.",
       "color": "purple"
@@ -97,7 +97,7 @@
         "label": "Solutions",
         "val": "1 eval"
       },
-      "now": "Automate invoicing Â· Project:Credit policy & dunning",
+      "now": "Automate invoicing ÃÂ· Project:Credit policy & dunning",
       "next": "Integrate with hubs (Hubject, Gireve, Enapi)",
       "later": "Migrate from Spirii to EV One ",
       "note": "",
@@ -124,9 +124,9 @@
         "label": "Solutions",
         "val": "1 eval"
       },
-      "now": "Finalize development to GTM Â· Marketing plan ",
-      "next": "GTM Â· Autocharge enrollment Â· RFID enablement",
-      "later": "Prompts to drive traffic to store Â· Personalization",
+      "now": "Finalize development to GTM ÃÂ· Marketing plan ",
+      "next": "GTM ÃÂ· Autocharge enrollment ÃÂ· RFID enablement",
+      "later": "Prompts to drive traffic to store ÃÂ· Personalization",
       "note": "",
       "desc": "Converging the Circle K Charge app into the main Circle K app. Enables store visits per session metric and long-term customer lifetime value uplift."
     },
@@ -152,8 +152,35 @@
         "val": "0"
       },
       "now": "Migrate OUPT from Driivz to EV One",
-      "next": "Assess scope of OpenPOS Â· Finalize M4 OUPT strategy",
-      "later": "Migrate OUPT from Spirii to EV One Â· Assess PLC cards ",
+      "next": "Assess scope of OpenPOS ÃÂ· Finalize M4 OUPT strategy",
+      "later": "Migrate OUPT from Spirii to EV One ÃÂ· Assess PLC cards ",
+      "note": "",
+      "desc": ""
+    },
+    {
+      "id": "dom-1773752676018",
+      "name": "Increase Visibility in In Car Navigation",
+      "pm": "Madhav",
+      "initials": "MB",
+      "status": "red",
+      "statusLabel": "In Progress",
+      "confidence": "hypothesis",
+      "opp": 3,
+      "live": 0,
+      "eval": 0,
+      "stratImpact": 5,
+      "friction": 5,
+      "m1": {
+        "label": "Opportunities",
+        "val": "0"
+      },
+      "m2": {
+        "label": "Solutions",
+        "val": "0"
+      },
+      "now": "",
+      "next": "",
+      "later": "",
       "note": "",
       "desc": ""
     }
@@ -188,7 +215,7 @@
     },
     {
       "id": 3,
-      "title": "Tap & Pay ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Logos",
+      "title": "Tap & Pay ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Logos",
       "domain": "Payments",
       "status": "live",
       "markets": [
@@ -198,7 +225,7 @@
     },
     {
       "id": 4,
-      "title": "Tap & Pay ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ Adyen (S1U2)",
+      "title": "Tap & Pay ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Adyen (S1U2)",
       "domain": "Payments",
       "status": "live",
       "markets": [
@@ -331,7 +358,7 @@
     },
     {
       "id": "r5",
-      "opportunity": "GMAP convergence ÃÂÃÂ¢ÃÂÃÂÃÂÃÂ customer migration & GTM",
+      "opportunity": "GMAP convergence ÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ customer migration & GTM",
       "domain": "GMAP Convergence & Commercial",
       "riskType": "viability",
       "severity": "high",
