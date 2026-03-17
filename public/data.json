@@ -128,7 +128,7 @@
       "initials": "MB",
       "status": "red",
       "statusLabel": "In Progress",
-      "confidence": "hypothesis",
+      "confidence": "directional",
       "opp": 3,
       "live": 0,
       "eval": 0,
