@@ -359,15 +359,6 @@
       "mitigation": "Due to this viability risk, CK has decided to run a project to establish credit policies, and dunning processes, to mitigate this"
     },
     {
-      "id": "r2",
-      "opportunity": "Plug & Charge (ISO 15118-20)",
-      "domain": "Get to Station & Start",
-      "riskType": "feasibility",
-      "severity": "medium",
-      "description": "Certificate-based authentication requires vehicle OEM adoption and charger firmware updates. External dependency not within Circle K's control.",
-      "mitigation": "Evaluation stage. Monitor OEM adoption curves. ISO 15118-2 (MAC-based) already live as interim."
-    },
-    {
       "id": "r3",
       "opportunity": "In-car display integration",
       "domain": "Charging Session",
