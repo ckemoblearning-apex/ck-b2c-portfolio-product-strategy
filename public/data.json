@@ -215,7 +215,7 @@
     },
     {
       "id": 3,
-      "title": "Tap & Pay ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Logos",
+      "title": "Tap & Pay - Logos",
       "domain": "Payments",
       "status": "live",
       "markets": [
@@ -225,7 +225,7 @@
     },
     {
       "id": 4,
-      "title": "Tap & Pay ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ Adyen (S1U2)",
+      "title": "Tap & Pay - Adyen (S1U2)",
       "domain": "Payments",
       "status": "live",
       "markets": [
@@ -317,6 +317,22 @@
         "LT"
       ],
       "desc": "Surfacing 1M+ chargepoints with live pricing across the roaming network on the Circle K web map."
+    },
+    {
+      "id": 1773781440032,
+      "title": "New Solution",
+      "domain": "",
+      "status": "eval",
+      "markets": [],
+      "desc": ""
+    },
+    {
+      "id": 1773781455051,
+      "title": "New Solution",
+      "domain": "",
+      "status": "eval",
+      "markets": [],
+      "desc": ""
     }
   ],
   "risks": [
