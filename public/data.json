@@ -352,11 +352,11 @@
     {
       "id": "r1",
       "opportunity": "Roaming experience opacity",
-      "domain": "Roaming",
-      "riskType": "value",
-      "severity": "medium",
-      "description": "Pricing opacity and authentication inconsistency for non-native users creates distrust and discourages repeat use.",
-      "mitigation": "OCPI-based roaming improvements in evaluation. Transparent pricing pre-session is unexplored."
+      "domain": "Inbound roaming",
+      "riskType": "viability",
+      "severity": "high",
+      "description": "95 % of revenues in M4 comes from inbound roaming, where we sell kWh to MSPs. The viability risk is that upto 25 % of invoices are disputed, where 8-12 % (according to Sprii) are losses. ",
+      "mitigation": "Due to this viability risk, CK has decided to run a project to establish credit policies, and dunning processes, to mitigate this"
     },
     {
       "id": "r2",
@@ -384,15 +384,6 @@
       "severity": "high",
       "description": "Re-prioritisation of resources to 1CP assessed as high likelihood of impact on the B2C GVSL Roadmap. Scope and timeline of affected initiatives not yet fully defined.",
       "mitigation": "Escalate to eMM. Clarify which B2C GVSL items are at risk and reprioritise accordingly."
-    },
-    {
-      "id": "r5",
-      "opportunity": "GMAP convergence ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ customer migration & GTM",
-      "domain": "GMAP Convergence & Commercial",
-      "riskType": "viability",
-      "severity": "high",
-      "description": "Converging away from the Circle K Charge App risks increased customer friction and potential customer loss for users not successfully migrated to GMAP. Commercial GTM model not yet confirmed.",
-      "mitigation": "Define migration plan and rollback strategy. Validate GTM approach before full rollout. Phased market launch (Latvia/Lithuania Tap & Pay first) agreed as interim mitigation."
     }
   ]
 }
