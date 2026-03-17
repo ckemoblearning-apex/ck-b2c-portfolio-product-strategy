@@ -330,22 +330,6 @@
         "NL"
       ],
       "desc": "Payter Apollo as payment terminal, Elavon as acquirer. Ca 500 terminals to be live and comissioned by end of CY 2026. "
-    },
-    {
-      "id": 1773781536865,
-      "title": "New Solution",
-      "domain": "",
-      "status": "eval",
-      "markets": [],
-      "desc": ""
-    },
-    {
-      "id": 1773781538568,
-      "title": "New Solution",
-      "domain": "",
-      "status": "eval",
-      "markets": [],
-      "desc": ""
     }
   ],
   "risks": [
