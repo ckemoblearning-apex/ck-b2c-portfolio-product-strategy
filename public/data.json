@@ -359,15 +359,6 @@
       "mitigation": "Due to this viability risk, CK has decided to run a project to establish credit policies, and dunning processes, to mitigate this"
     },
     {
-      "id": "r3",
-      "opportunity": "In-car display integration",
-      "domain": "Charging Session",
-      "riskType": "feasibility",
-      "severity": "low",
-      "description": "Requires OCPP session data combined with vehicle API access. Both are externally dependent and market is fragmented across OEMs.",
-      "mitigation": "Discovery only. Not a near-term priority. Monitor standardisation progress."
-    },
-    {
       "id": "r4",
       "opportunity": "1CP resource re-prioritisation",
       "domain": "Programme-level",
