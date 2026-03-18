@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "Circle K eMobility Â· B2C Product",
-    "subtitle": "Portfolio Strategy Â· 2027",
+    "title": "Circle K eMobility ÃÂ· B2C Product",
+    "subtitle": "Portfolio Strategy ÃÂ· 2027",
     "lastUpdated": "March 17 2026",
     "confidential": true,
     "outcomeStatement": "Become the market's easiest charging provider",
@@ -61,7 +61,7 @@
         "label": "Solutions",
         "val": "1 eval"
       },
-      "now": "Automate invoicing · Project:Credit policy & dunning",
+      "now": "Automate invoicing - Project:Credit policy & dunning",
       "next": "Integrate with hubs (Hubject, Gireve, Enapi)",
       "later": "Migrate from Spirii to EV One ",
       "note": "",
@@ -88,9 +88,9 @@
         "label": "Solutions",
         "val": "1 eval"
       },
-      "now": "Finalize development to GTM · Marketing plan ",
-      "next": "GTM · RFID enablement",
-      "later": "Prompts to drive traffic to store · Personalization",
+      "now": "Finalize development to GTM - Marketing plan ",
+      "next": "GTM - RFID enablement",
+      "later": "Prompts to drive traffic to store - Personalization",
       "note": "",
       "desc": "Converging the Circle K Charge app into the main Circle K app. Enables store visits per session metric and long-term customer lifetime value uplift."
     },
@@ -116,8 +116,8 @@
         "val": "0"
       },
       "now": "Migrate OUPT from Driivz to EV One",
-      "next": "Assess scope of OpenPOS · Finalize M4 OUPT strategy",
-      "later": "Migrate OUPT from Spirii to EV One · Assess PLC cards ",
+      "next": "Assess scope of OpenPOS Â· Finalize M4 OUPT strategy",
+      "later": "Migrate OUPT from Spirii to EV One Â· Assess PLC cards ",
       "note": "",
       "desc": ""
     },
@@ -142,7 +142,7 @@
         "label": "Solutions",
         "val": "0"
       },
-      "now": "Evaluate Cirrantic as complimentary to eco-movement · Evaluate Here Maps · Evaluate 4screen",
+      "now": "Evaluate Cirrantic as complimentary to eco-movement Â· Evaluate Here Maps Â· Evaluate 4screen",
       "next": "Pilot Routeplanner ",
       "later": "",
       "note": "",
