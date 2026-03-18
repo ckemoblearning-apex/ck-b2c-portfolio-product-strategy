@@ -372,7 +372,7 @@ async function loadData() {
     if (!res.ok) throw new Error(`GitHub API ${res.status}: ${await res.text()}`);
     const json = await res.json();
     fileSha = json.sha;
-    DATA = JSON.parse(atob(json.content.replace(/\n/g,'')));
+    DATA = JSON.parse(decodeURIComponent(escape(atob(json.content.replace(/\n/g,'')))));
     populateForm();
     document.getElementById('btn-save').disabled = false;
     document.getElementById('btn-reload').disabled = false;
